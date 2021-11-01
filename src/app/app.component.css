@@ -93,7 +93,7 @@ img:hover{
    left:0;
    z-index: 500;
    padding-top:30px;
-   word-spacing: 2px;
+   word-spacing:2px;
    word-wrap: break-word;
    overflow-y:hidden;
    object-fit:scale-down ;
