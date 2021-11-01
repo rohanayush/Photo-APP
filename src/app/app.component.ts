@@ -86,6 +86,7 @@ export class AppComponent {
   }
   search1() {
     this.search(this.val);
+    localStorage.setItem("token",this.val);
   }
 
   ddd: any[] = [];
