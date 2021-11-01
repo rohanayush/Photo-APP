@@ -1,38 +1,62 @@
-<div class="nav">
+<div class="navv">
   <div class="title">
     <h2>Photo<span>App</span></h2>
   </div>
 </div>
+
+
 <div>
   <div class="center">
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Search for  pictures</mat-label>
-      <input type="text" #query placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-        [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val" [(ngModel)]="val" >
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-icon (click)="search1()">search</mat-icon>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Search for pictures</mat-label>
+        <input type="text" #query placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+          [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val" [(ngModel)]="val">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-icon (click)="search1()">
+        search
+      </mat-icon>
     </form>
   </div>
-  <div class="row contain" *ngFor="let pos of arrQuery">
+  <div class="row contain" style="text-align: center;" *ngFor="let pos of arrQuery">
     <!-- class="row my-row justify-content-around" -->
-    <div data-aos="zoom-out-down"  data-aos-duration="1000"class="col-md-3 col-sm-3 col-xs-3 col-xl-3 animate__animated animate__fadeInDown"
+    <div data-aos="zoom-out-down" data-aos-duration="700"
+      class="col-md-3 col-sm-3 col-xs-3 col-xl-3 animate__animated animate__fadeInDown"
       style="background-color: {{p.color}};" *ngFor="let p of pos" (mouseenter)="processColor(p)">
       <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
-      <img   src="{{p.urls.small}}" />
-      <button class="sideways btn"  style="background-color: {{p.color}};"><mat-icon>arrow_right_alt</mat-icon></button>
+      <img src="{{p.urls.small}}" />
+      <button class="sideways btn" style="background-color: {{p.color}};">
+        <mat-icon>arrow_right_alt</mat-icon>
+      </button>
+
+      <!-- hover details -->
       <div class="info">
-        <button class="btn " style="font-size:5px;font-style:bolder;background-color: {{p.color}}" ><mat-icon>info</mat-icon></button>
-        <span data-aos="zoom-out-down" class="info1 animate__animated animate__zoomIn" style="background-color: {{p_color}}; z-index:104">
-          <h6>{{p.alt_description}}</h6>
-          <p>{{p.description}}</p>
-        </span>
+        <button class="btn " style="font-size:5px;font-style:bolder;background-color: {{p.color}}">
+          <mat-icon>info</mat-icon>
+        </button>
       </div>
+
+
+      <div class="img-box " style="background-color: {{p_color}}; z-index:104">
+
+        <h2>{{p.alt_description}}</h2>
+        <p>{{p.description}}</p>
+
+
+      </div>
+
+      <!-- hover details -->
+
+
+
+
+
+
       <!-- <button class="btn btn-danger">Love</button> -->
 
 
@@ -49,6 +73,9 @@
          
         </div> -->
       <!-- </div> -->
+    </div>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()">
     </div>
   </div>
 </div>

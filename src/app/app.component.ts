@@ -31,7 +31,7 @@ export class AppComponent {
     var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
     console.log("luma",luma);
     if (luma > 240) {
-      this.p_color="black";    
+      this.p_color="rgb(149, 146, 142)";    
     console.log("color made",this.p_color);
       
       // pick a different colour
@@ -58,13 +58,14 @@ export class AppComponent {
   search(value) {
     this.arrQuery = [];
     this.photoServices.getPhotos(value).subscribe((resp: any) => {
-      this.arrQuery.push(resp.photos.results);
-      console.log(resp.photos.results);
+      console.log("resp",resp)
+      this.arrQuery.push(resp.results);
+      console.log("results",resp.results);
     });
   }
   val: string;
   sendValue(value: any) {
-    this.arrQuery = [];
+    // this.arrQuery = [];
 
     console.log("value", value)
 
@@ -113,6 +114,17 @@ export class AppComponent {
     const filterValue = value.toLowerCase();
 
     return this.optionss.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  onScroll() {
+    if (this.val && this.val.length > 0) {
+      this.photoServices.getPhotos(this.val).subscribe(
+        (data:any)=>{
+          this.arrQuery.push(data.results);
+        },
+        (error:any)=>{
+        }
+      )
+    }
   }
 
 

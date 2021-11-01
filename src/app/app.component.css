@@ -34,6 +34,7 @@ img:hover{
       margin-top:50px;
       margin: 0 auto;
       width:70%;
+      text-align: center;
 
 }
 /* for info */
@@ -44,8 +45,12 @@ img:hover{
     font-size: smaller;
     top:0;
     right:0;
+   
     z-index:399;
 
+}
+.example-form{
+    margin: 0 auto;
 }
 .round{
  /* border-width:2px ; */
@@ -55,6 +60,7 @@ img:hover{
  /* border-radius: 90%; */
  color:white;
  z-index:102;
+ 
 }
 .info1{
     background-color: rgb(25, 32, 30);
@@ -70,30 +76,55 @@ img:hover{
     border-radius: 7px;
     font-size: 11x;
 }
-.info:hover span.info1{
-    display: block;
-    transform: scale(1.1,1.1) ;
-    transition: 3.8s  transform;
+.img-box{
+    position: absolute;
+    width:100%;
+    /* background-color: aqua; */
+    /* opacity: 0.5; */
+    /* color:black; */
+    /* display: none; */
+    visibility: hidden;
+    background-color: black;
+    height:fit-content;
+    color:white;
+    text-align: center;
+    /* margin-top:-100px; */
+   top:3%;
+   left:0;
+   z-index: 500;
+   padding-top:30px;
+   word-spacing: 2px;
+   word-wrap: break-word;
+   overflow-y:hidden;
+   object-fit:scale-down ;
+
 
 }
-.nav{
+.info:hover + .img-box{
+    visibility: visible;
+
+
+}
+
+
+
+
+.navv{
     top:0;
     position: sticky;
     z-index:1001;
     padding:5px;
     background-color: rgb(25, 48, 110);
     margin-bottom: 30px;
-   
+    width:100%;
 }
 .title{
-    margin:0 auto;
+    text-align: center;
     color: aliceblue;
 }
 
 .center{
-    position: relative;
-    left:30%;
-    top:10%;
+     text-align: center;
 }
 .sideways{
     position: absolute;
@@ -104,3 +135,4 @@ img:hover{
     box-shadow:1px 1px 1px 1px white;
     font-size: 7px;
 }
+
