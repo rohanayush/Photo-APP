@@ -7,10 +7,10 @@
 
 <div>
   <div class="center">
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
+    <form >
+      <mat-form-field >
         <mat-label>Search for pictures</mat-label>
-        <input type="text" #query placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+        <input type="text" #query placeholder="put your query" aria-label="Number" matInput [formControl]="myControl"
           [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val" [(ngModel)]="val">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -18,24 +18,38 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-      <mat-icon (click)="search1()">
+      <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
         search
       </mat-icon>
     </form>
   </div>
-  <div class="row contain" style="text-align: center;" *ngFor="let pos of arrQuery">
+  <div class="row contain"style="margin: auto" *ngFor="let pos of arrQuery">
     <!-- class="row my-row justify-content-around" -->
     <div data-aos="zoom-out-down" data-aos-duration="700"
-      class="col-md-3 col-sm-3 col-xs-3 col-xl-3 animate__animated animate__fadeInDown"
-      style="background-color: {{p.color}};" *ngFor="let p of pos" (mouseenter)="processColor(p)">
+      class="col-md-6 col-sm-10 col-xs-11 col-lg-3 m-1 " style="background-color: {{p.color}};border-radius:11px;"
+   *ngFor="let p of pos; let i=index" (mouseenter)="processColor(p)">
       <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
-      <img src="{{p.urls.small}}" />
-      <button class="sideways btn" style="background-color: {{p.color}};">
+
+
+        <img src="{{p.urls.small}}" />
+     
+      
+      <button class="sideways btn" (click)="dialog(p)"style="background-color: {{p.color}};">
         <mat-icon>arrow_right_alt</mat-icon>
-      </button>
+      </button> 
+      <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
+        <!-- <span class="cross" (click)="setDialog()">close</span> -->
+        <ul>
+         <li (click)="download(p.urls.full)">Full</li>
+          <li (click)="download(p.urls.regular)">Regular</li>
+          <li (click)="download(p.urls.raw)">Raw</li>
+          <li (click)="download(p.urls.small)">Small</li>
+        </ul>
+
+      </div>
 
       <!-- hover details -->
-      <div class="info">
+       <div class="info">
         <button class="btn " style="font-size:5px;font-style:bolder;background-color: {{p.color}}">
           <mat-icon>info</mat-icon>
         </button>
@@ -50,29 +64,14 @@
 
       </div>
 
-      <!-- hover details -->
 
 
 
 
 
 
-      <!-- <button class="btn btn-danger">Love</button> -->
 
-
-      <!-- <div class="colu1">
-        <div >
-        <p class="h4">{{p.description}}</p>  </div>
-        <div>
-          <br><br>
-          <button class="btn btn-info">Read a Blog!</button>
-        </div>
-        <br>
-        <div>
-          <button class="btn btn-default" >Others ...</button>
-         
-        </div> -->
-      <!-- </div> -->
+      
     </div>
     <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
       (scrolled)="onScroll()">

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { count, map, startWith } from 'rxjs/operators';
 
-
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +38,38 @@ export class AppComponent {
     }
     
 
+  }
+  dlg:boolean=false;
+  dialog(p){
+    if(this.q != p){
+      this.dlg=false;
+      this.q=p;
+    }
+    console.log(this.dlg)
+    this.dlg=!this.dlg;
+    this.same(p);
+
+  }
+  download(url){
+    this.http.get(url,{ responseType: 'blob' }).subscribe(
+      (d:any)=>{
+        console.log("image url data",d);
+        // const url = URL.createObjectURL(d);
+        saveAs(d, "image.jpg");
+      // URL.revokeObjectURL(url);
+      },
+      (err:any)=>{
+        console.log("error",err)
+      }
+    )
+  
+  }
+  q:any;
+  same(p){
+    this.q=p; 
+  }
+  setDialog(){
+    this.dlg=false;
   }
   showDetails(adv: any) {
     console.log(adv);
@@ -129,3 +161,5 @@ export class AppComponent {
 
 
 }
+
+
