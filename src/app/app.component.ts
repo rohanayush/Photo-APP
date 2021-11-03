@@ -97,7 +97,7 @@ export class AppComponent {
     },
     (err:any)=>{
       console.log("error in search",err);
-      alert("Please search for something else like flowers,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
+      alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
   }
   val: string;
