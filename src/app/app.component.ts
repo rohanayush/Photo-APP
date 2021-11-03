@@ -89,10 +89,15 @@ export class AppComponent {
   filteredOptions?: Observable<string[]>;
   search(value) {
     this.arrQuery = [];
-    this.photoServices.getPhotos(value).subscribe((resp: any) => {
+    this.photoServices.getPhotos(value).subscribe(
+      (resp: any) => {
       console.log("resp",resp)
       this.arrQuery.push(resp.results);
       console.log("results",resp.results);
+    },
+    (err:any)=>{
+      console.log("error in search",err);
+      alert("Please search for something else like flowers,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
   }
   val: string;
