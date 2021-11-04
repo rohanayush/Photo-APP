@@ -32,6 +32,10 @@ export class UnsplashService {
       this.currPage = 1;
     }
     this.prevKeyword = q;
-    return this.http.get<any>(`${this.base_url}page=${this.currPage}&per_page=${this.per_page}&query=${q}&client_id=${this.key}`);
+    return this.http.get<any>(`${this.base_url}page=${this.currPage}&per_page=${this.per_page}&query=${q}&utm_source=favourites&utm_medium=referral&client_id=${this.key}`);
+  }
+  register_download(p){
+    return this.http.get<any>(`${p.links.download_location}&client_id=${this.key}`);
+
   }
 }

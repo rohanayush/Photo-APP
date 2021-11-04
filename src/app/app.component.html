@@ -4,7 +4,10 @@
   </div>
 </div>
 
+<div *ngIf="load" class="loader">
 
+ 
+</div>
 <div>
   <div class="center">
     <form >
@@ -12,8 +15,8 @@
         <mat-label>Search for pictures</mat-label>
         <input type="text" #query placeholder="put your query" aria-label="Number" matInput [formControl]="myControl"
           [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val" [(ngModel)]="val">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option [ngStyle]="{'margin-top':'30px'}" *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
           </mat-option>
         </mat-autocomplete>
@@ -23,7 +26,8 @@
       </mat-icon>
     </form>
   </div>
-  <div class="row contain"style="margin: auto" *ngFor="let pos of arrQuery">
+
+  <div class="row contain" *ngFor="let pos of arrQuery">
     <!-- class="row my-row justify-content-around" -->
     <div data-aos="zoom-out-down" data-aos-duration="700"
       class="col-md-6 col-sm-10 col-xs-11 col-lg-3 m-1 " style="background-color: {{p.color}};border-radius:11px;"
@@ -35,29 +39,30 @@
      
       
       <button class="sideways btn" (click)="dialog(p)"style="background-color: {{p.color}};">
-        <mat-icon>arrow_right_alt</mat-icon>
+        <mat-icon [ngStyle]="{'color':'green'}">arrow_downward</mat-icon>
       </button> 
       <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
         <!-- <span class="cross" (click)="setDialog()">close</span> -->
         <ul>
-         <li (click)="download(p.urls.full)">Full</li>
-          <li (click)="download(p.urls.regular)">Regular</li>
-          <li (click)="download(p.urls.raw)">Raw</li>
-          <li (click)="download(p.urls.small)">Small</li>
+         <li (click)="register(p,p.urls.full) ">Full</li>
+          <li (click)="register(p,p.urls.regular)">Regular</li>
+          <li (click)="register(p,p.urls.raw)">Raw</li>
+          <li (click)="register(p,p.urls.small)">Small</li>
         </ul>
 
       </div>
 
       <!-- hover details -->
-       <div class="info">
-        <button class="btn " style="font-size:5px;font-style:bolder;background-color: {{p.color}}">
+       <div class="info" (click)="info(p)">
+        <button class="btn" style="font-size:5px;background-color: {{p.color}}">
           <mat-icon>info</mat-icon>
         </button>
       </div>
 
 
-      <div class="img-box " style="background-color: {{p_color}}; z-index:104">
-
+      <div class="img-box " *ngIf="img_box && p===q"style="background-color: {{p_color}}; z-index:104">
+        <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
+        <p>Photo by <a href= {{url_author}}>{{p.user.first_name}}&nbsp;{{p.user.last_name}}</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral">Unsplash</a></p>
         <h2>{{p.alt_description}}</h2>
         <p>{{p.description}}</p>
 

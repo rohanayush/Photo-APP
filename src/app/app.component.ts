@@ -87,15 +87,22 @@ export class AppComponent {
     // });
   }
   filteredOptions?: Observable<string[]>;
+  load:boolean=false;
   search(value) {
     this.arrQuery = [];
+    this.load=true;
+
     this.photoServices.getPhotos(value).subscribe(
       (resp: any) => {
       console.log("resp",resp)
+      this.load=false;
+
       this.arrQuery.push(resp.results);
       console.log("results",resp.results);
     },
     (err:any)=>{
+  this.load=false;
+
       console.log("error in search",err);
       alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
@@ -121,6 +128,39 @@ export class AppComponent {
     // this.search(value);
 
 
+  }
+  key:string="apJcuP6-W8CWpsM4a3LiI8XPsFEB4NSDV9bsBwgSwO0";
+  tail="?utm_source=favourites&utm_medium=referral"
+  head:string;
+  url_author:string;
+  g="https://google.co.in";
+  img_box=false;
+  qq:any;
+ info(p){
+   console.log();
+   if(this.q != p){
+    this.img_box=false;
+    this.q=p;
+  }
+   this.same(p);
+
+
+   this.head=p.user.links.html.toString();
+   this.url_author= this.head+this.tail;
+   console.log("url for author",this.url_author)
+   this.img_box=!this.img_box;
+
+ }
+  register(p,q){
+this.photoServices.register_download(p).subscribe(
+(  data:any)=>{
+  console.log("some data",data);
+  this.download(q);
+},
+(err:any)=>{
+  console.log("error in registering",err);
+}
+)
   }
   search1() {
     this.search(this.val);
