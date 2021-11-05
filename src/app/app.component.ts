@@ -192,7 +192,7 @@ this.photoServices.register_download(p).subscribe(
 
     return this.optionss.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-  onScroll() {
+  onScroll() { 
     if (this.val && this.val.length > 0) {
       this.photoServices.getPhotos(this.val).subscribe(
         (data:any)=>{
