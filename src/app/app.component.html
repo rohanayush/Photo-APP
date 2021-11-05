@@ -10,20 +10,23 @@
 </div>
 <div>
   <div class="center">
-    <form >
+    <form (ngSubmit)="search(val)">
       <mat-form-field >
         <mat-label>Search for pictures</mat-label>
         <input type="text" #query placeholder="put your query" aria-label="Number" matInput [formControl]="myControl"
           [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val" [(ngModel)]="val">
+          <!-- <div style="z-index:2400"> -->
         <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option [ngStyle]="{'margin-top':'30px'}" *ngFor="let option of filteredOptions | async" [value]="option">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}} 
           </mat-option>
         </mat-autocomplete>
+        <!-- </div> -->
       </mat-form-field>
-      <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
+      <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
         search
-      </mat-icon>
+      </mat-icon> -->
+      <input type="submit" value="Search" class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
     </form>
   </div>
 
