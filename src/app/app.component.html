@@ -1,3 +1,4 @@
+<div >
 <div class="navv">
   <div class="title">
     <h2>Photo<span>App</span></h2>
@@ -5,9 +6,8 @@
 </div>
 
 <div *ngIf="load" class="loader">
-
- 
 </div>
+
 <div>
   <div class="center">
     <form (ngSubmit)="search(val)">
@@ -30,7 +30,35 @@
     </form>
   </div>
 
-  <div class="row contain" *ngFor="let pos of arrQuery">
+  <!-- Creating basic blocks of choices to fill the gaps -->
+    <div class="choices row">
+    
+    <div class="col-md-12">  Here are some terms to assist you to find the best you want for yourself . Happy Searching... 
+      <br />
+     <span *ngIf="sg" style="color:purple" (click)="hideSuggestions()"> Hide Sugestions</span>
+     <span *ngIf="!sg" style="color:purple" (click)="hideSuggestions()"> Show Sugestions</span> |
+    <span *ngIf="!sg && arrQuery.length!=0"  > Showing results for {{term}} </span>
+     <!-- <span *ngIf="!sg" style="color:purple" > Showing results for {{term}} </span> -->
+     
+      </div>
+      <div *ngIf="sg"  class="row appear">
+      <div *ngFor="let o of sg_arr;let i=index"  class="cardbox col-md-3" (click)="search(sg_arr[i])">
+        {{o}}
+      </div>
+      
+      </div>
+    </div>
+  <!-- Creating basic blocks of choices to fill the gaps -->
+
+  <!-- creating validation msges -->
+   <div class="msg" *ngIf="msg">
+     Please Enter a valid search term to continue. Thanks :) <button class="btn" style="color: white;border:none" (click)="closeMsg()">X</button> 
+       </div>
+  <!-- creating validation msges -->
+
+
+
+  <div class="row contain" style="background:url({{src}},0.8);overflow: auto;object-fit:contain;" *ngFor="let pos of arrQuery">
     <!-- class="row my-row justify-content-around" -->
     <div data-aos="zoom-out-down" data-aos-duration="700"
       class="col-md-6 col-sm-10 col-xs-11 col-lg-3 m-1 " style="background-color: {{p.color}};border-radius:11px;"
@@ -51,6 +79,7 @@
           <li (click)="register(p,p.urls.regular)">Regular</li>
           <li (click)="register(p,p.urls.raw)">Raw</li>
           <li (click)="register(p,p.urls.small)">Small</li>
+          <li (click)="setWallpaper(p.urls.regular)">Set as Background</li>
         </ul>
 
       </div>
@@ -71,18 +100,10 @@
 
 
       </div>
-
-
-
-
-
-
-
-
-      
     </div>
     <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
       (scrolled)="onScroll()">
     </div>
   </div>
+</div>
 </div>

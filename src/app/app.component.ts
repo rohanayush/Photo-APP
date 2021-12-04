@@ -19,6 +19,7 @@ export class AppComponent {
   p_color: string;
   url: string = "https://playground-trends-backend.herokuapp.com"
   myControl = new FormControl();
+  src:string="";
   processColor(c) {
     this.p_color=c.color;
     console.log("color reached",c.color);
@@ -88,7 +89,32 @@ export class AppComponent {
   }
   filteredOptions?: Observable<string[]>;
   load:boolean=false;
+  msg:boolean=false;
+  sg:boolean=true;
+  term:string="";
+  sg_arr=["Flower","Music","Greetings","Cars","Cute",
+  "Animals","Wallpaper","Cartoons","Nature","Retro",
+  "Games"]
+  hideSuggestions(){
+    this.sg =!this.sg;
+  }
+  closeMsg(){
+    this.msg=false;
+  }
+  setWallpaper(p){
+    this.src=p;
+
+  }
   search(value) {
+    console.log(value,"checking value received on search")
+    if(typeof(value) === 'undefined'){
+      this.msg=true;
+      console.log("Reached inside null and value of msg is:",this.msg)
+
+    }
+    else if(typeof(value) != 'undefined'){
+      this.term =value;
+      this.sg=false;
     this.arrQuery = [];
     this.load=true;
 
@@ -107,6 +133,7 @@ export class AppComponent {
       alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
   }
+}
   val: string;
   sendValue(value: any) {
     // this.arrQuery = [];
@@ -136,12 +163,16 @@ export class AppComponent {
   g="https://google.co.in";
   img_box=false;
   qq:any;
+
  info(p){
+
    console.log();
-   if(this.q != p){
+   if(this.q != p)
+   {
     this.img_box=false;
     this.q=p;
   }
+
    this.same(p);
 
 
@@ -151,6 +182,8 @@ export class AppComponent {
    this.img_box=!this.img_box;
 
  }
+
+
   register(p,q){
 this.photoServices.register_download(p).subscribe(
 (  data:any)=>{
@@ -162,6 +195,8 @@ this.photoServices.register_download(p).subscribe(
 }
 )
   }
+
+
   search1() {
     this.search(this.val);
     localStorage.setItem("token",this.val);
@@ -182,16 +217,16 @@ this.photoServices.register_download(p).subscribe(
     );
     console.log("options:", this.optionss);
     console.log("flterred options:", this.filteredOptions);
-
-
-
   }
 
+  
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.optionss.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+
+
   onScroll() { 
     if (this.val && this.val.length > 0) {
       this.photoServices.getPhotos(this.val).subscribe(

@@ -159,11 +159,13 @@ li{
     padding:5px;
 }
 
+
 .center{
     /* margin-top: 30px; */
      text-align: center;
      top:8%;
     position: fixed;
+
     z-index:1001;
     /* padding:5px; */
     /* background-color: white; */
@@ -315,4 +317,60 @@ li{
       transform: rotate(360deg);
     }
   }
-  
+  .choices{
+    position: relative;
+    margin-top: 150px;
+    width:100%;
+    text-align: center;
+    /* margin:0 auto; */
+    top:30%;
+    /* left:20%; */
+    background: #c6cac6;
+    overflow: auto;
+    padding-left:100px;
+  }
+  .cardbox{
+    /* box-shadow: 2px 2px 2px 2px grey; */
+    border-radius: 11px;
+    /* border:2px solid grey; */
+    padding:10px;
+    margin:20px;
+    height:100px;
+    width:auto;
+    text-align: center;
+    padding-top:37px;
+    color:white;
+    background-color: #19306E;
+    transition: transform 1s ease;
+  }
+  .cardbox:hover{
+    transform: scale(112%);
+  }
+  button:hover{
+    transform: scale(112%);
+  }
+  .msg{
+    z-index:5001;
+    top:30%;
+    left:30%;
+    width: 35%;
+    position: absolute;
+    background-color: red;
+    color:white;
+    padding:10px;
+    border-radius: 11px;
+ 
+
+  }
+  .row {
+    cursor: pointer;
+  }
+  .appear{
+    /* transition: tra2s ease; */
+    padding-left:15%;
+    padding-right:15%;
+
+  }
+  .appear::after{
+    transform: scale(101%);
+  }
