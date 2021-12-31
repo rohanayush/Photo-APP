@@ -14,12 +14,22 @@ import { saveAs } from 'file-saver/FileSaver';
 })
 export class AppComponent {
   constructor(private photoServices: UnsplashService, private http: HttpClient) {
+            for(var i=0;i<this.sg_arr.length;i++){
+              var a={}
+              
+               
+              a["name"]=this.sg_arr[i];
+              a["resp"]="https://source.unsplash.com/random/700x700/?"+this.sg_arr[i];
+              this.sg_arr1.push(a);
+            }
+            console.log("aray",this.sg_arr1);
 
   }
+  sg_arr1=[];
   p_color: string;
   url: string = "https://playground-trends-backend.herokuapp.com"
   myControl = new FormControl();
-  src:string="";
+  src:string="rgb(215, 208, 190)";
   processColor(c) {
     this.p_color=c.color;
     console.log("color reached",c.color);
@@ -40,6 +50,12 @@ export class AppComponent {
     
 
   }
+  val1="Your searched term will appear here"
+  clear(){
+    this.arrQuery=[];
+    this.hideSuggestions();
+    this.val1="Your searched term will appear here";
+  }
   dlg:boolean=false;
   dialog(p){
     if(this.q != p){
@@ -48,15 +64,24 @@ export class AppComponent {
     }
     console.log(this.dlg)
     this.dlg=!this.dlg;
+    if(this.dlg){
+      this.img_box =false;
+    }
     this.same(p);
 
   }
-  download(url){
+  download(url,obj){
+    console.log("object in download ",obj);
     this.http.get(url,{ responseType: 'blob' }).subscribe(
       (d:any)=>{
         console.log("image url data",d);
         // const url = URL.createObjectURL(d);
-        saveAs(d, "image.jpg");
+        if(obj.alt_description!= null){
+        saveAs(d, obj.alt_description.toString()+".jpg");
+        }
+        else if(obj.alt_description == null){
+          saveAs(d, "obj.alt_description.toString()"+".jpg");
+          }
       // URL.revokeObjectURL(url);
       },
       (err:any)=>{
@@ -76,6 +101,9 @@ export class AppComponent {
     console.log(adv);
     this.clk = true;
   }
+  showSuggestions(){
+    this.sg=true;
+  }
   clk: boolean;
   optionss: string[] = [];
 
@@ -92,11 +120,13 @@ export class AppComponent {
   msg:boolean=false;
   sg:boolean=true;
   term:string="";
+  
   sg_arr=["Flower","Music","Greetings","Cars","Cute",
   "Animals","Wallpaper","Cartoons","Nature","Retro",
   "Games"]
+
   hideSuggestions(){
-    this.sg =!this.sg;
+    this.sg =false;
   }
   closeMsg(){
     this.msg=false;
@@ -106,6 +136,8 @@ export class AppComponent {
 
   }
   search(value) {
+    this.clear();
+    this.val1=value;
     console.log(value,"checking value received on search")
     if(typeof(value) === 'undefined'){
       this.msg=true;
@@ -180,15 +212,19 @@ export class AppComponent {
    this.url_author= this.head+this.tail;
    console.log("url for author",this.url_author)
    this.img_box=!this.img_box;
+   if(this.img_box){
+     this.dlg=false;
+   }
 
  }
 
 
   register(p,q){
+    this.download(q,p);
 this.photoServices.register_download(p).subscribe(
 (  data:any)=>{
   console.log("some data",data);
-  this.download(q);
+  this.download(q,p);
 },
 (err:any)=>{
   console.log("error in registering",err);
