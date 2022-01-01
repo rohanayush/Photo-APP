@@ -1,6 +1,3 @@
-<div *ngIf="load" class="loader">
-  <!-- <img src="assets/magic.jpg" width="200" height="200"> -->
-</div>
 <div>
   <div class="" >
     <div class="navvv" id="section1" >
@@ -13,10 +10,9 @@
 
 
 
-      <div class="center" *ngIf="!present">
-        
+      <div class="center">
         <form (ngSubmit)="search(val)">
-           <mat-form-field>
+          <mat-form-field>
             <mat-label>Search for pictures</mat-label>
             <input type="text" #query placeholder="put your query" aria-label="Number" matInput
               [formControl]="myControl" [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val"
@@ -34,16 +30,13 @@
       </mat-icon> -->
           <input type="submit" value="Search" class="btn"
             style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
-            <button class="btn min" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;word-wrap:break-word;" (click)="presen1()">
-              -
-             </button>
+
         </form>
-        
       </div>
   </div>
 
   <!-- Creating basic blocks of choices to fill the gaps -->
-  <div class="choices row" *ngIf="explorer">
+  <div class="choices row">
 
     <div *ngIf="sg" (click)="hideSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
 
@@ -56,7 +49,7 @@
 
     </div>
     <div *ngIf="sg" class="row appear">
-      <div *ngFor="let o of sg_arr1;let i=index" class="cardbox col-md-8 col-sm-11 col-xs-12 col-lg-5 "
+      <div *ngFor="let o of sg_arr1;let i=index" class="cardbox col-md-7 col-sm-9 col-xs-11 col-lg-4 "
         (click)="search(o.name)">
         <span class="text">
           {{o.name}}
@@ -130,25 +123,22 @@
     </div>
   </div>
 </div>
-
-<div class="delete" *ngIf="present">
-  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#4a7fe9;word-wrap:break-word;" (click)="showSuggestions()">
-    💫
-   </button>
+<div class="delete">
+  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#4a7fe9">
+ 💫
+</button>
+  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
  
+      {{val1}}
+   
+  </button>
   <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;background:#DEDFE1"
     (click)="clear()">
     <mat-icon [ngStyle]="{'color':'red'}">delete</mat-icon>
   </button>
-  <!-- <a href="#section1"><button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
+  <a href="#section1"><button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
    
       <mat-icon [ngStyle]="{'color':'blue'}">arrow_upward</mat-icon>
     
-  </button></a> -->
-
-  <button class="btn"(click)="presen()" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
- 
-    🔍{{val1}}
- 
-</button>
+  </button></a>
 </div>

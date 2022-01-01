@@ -43,8 +43,10 @@ body{
  
     margin-top:12px;
     animation: appear 0.9s ease;
-    position: absolute;
+    /* position: absolute; */
     top:32%;
+    height:100vh;
+
 }
 /* not working */
 @keyframes appear {
@@ -221,8 +223,9 @@ li{
 
 .center{
     /* margin-top: 830px; */
+    position: fixed;
      text-align: center;
-     top:8%;
+     bottom:-5%;
     /* position: fixed; */
 
     z-index:1010;
@@ -234,6 +237,7 @@ li{
     width:100%;
     /* margin-bottom: 30px; */
     padding: 10px;
+    z-index:50001;
 }
 
 .loading{
@@ -285,7 +289,21 @@ li{
     border-radius: 11px;
     
 }
-
+.min{
+  background:rgb(170, 168, 168);
+  visibility: visible;
+  display: block;
+}
+@media (max-width:600px) {
+  .min{
+    visibility: none;
+    display: none;
+  }
+  .choices{
+    height: 40vh;
+  }
+  
+}
 .loader {
     top:30%;
     left:40%;
@@ -304,6 +322,7 @@ li{
     transform: translateZ(0);
     -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    font-size: 45px;
   }
   @-webkit-keyframes load6 {
     0% {
@@ -382,14 +401,14 @@ li{
   margin:0 auto;
 }
   .choices{
-    position: absolute;
-    /* margin-top: 150px; */
+    /* position: absolute; */
+  
     width:70%;
     /* border:3px solid rgb(82, 218, 236); */
     border-radius: 12px;
     text-align: center;
     /* margin:0 auto; */
-    top:20%;
+    /* top:22%; */
     left:15%;
     /* left:20%; */
     /* background: #c6cac6; */
@@ -402,7 +421,11 @@ li{
     /* margin-left: 3rem; */
     /* margin-right:4rem; */
     margin:0 auto;
+    margin-top: 15px;
+
     z-index:900;
+    height:60vh;
+    transition: width 0.4s ease,height 0.4s ease;
 
 
   }
@@ -412,10 +435,11 @@ li{
     /* position: absolute; */
     border-radius: 11px;
     /* border:2px solid grey; */
-    padding:10px;
+    /* padding:20px; */
     margin:20px;
+    /* margin: 0 auto; */
     height:100px;
-    display: inline-block;
+    /* display: inline-block; */
     /* width:; */
     text-align: center;
     padding-top:37px;
@@ -483,7 +507,20 @@ li{
   }
   .delete{
     position:fixed;
-    bottom:3%;
+    bottom:-5%;
     z-index: 5001;
-    right:3%;
+    float:6%;
+  }
+  .topic{
+    position:absolute;
+    top:20%;
+    z-index: 5001;
+    font-size: 12px;
+
+  }
+  @media  (max-width:500px) {
+    .cardbox{
+      margin-left:-2px;
+    }
+    
   }

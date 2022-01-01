@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,HostListener} from '@angular/core';
 import { UnsplashService } from './unsplash.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { saveAs } from 'file-saver/FileSaver';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  // load=true;
   constructor(private photoServices: UnsplashService, private http: HttpClient) {
             for(var i=0;i<this.sg_arr.length;i++){
               var a={}
@@ -50,11 +51,11 @@ export class AppComponent {
     
 
   }
-  val1="Your searched term will appear here"
+  val1="🕵️"
   clear(){
     this.arrQuery=[];
     this.hideSuggestions();
-    this.val1="Your searched term will appear here";
+    this.val1="🕵️";
   }
   dlg:boolean=false;
   dialog(p){
@@ -90,6 +91,7 @@ export class AppComponent {
     )
   
   }
+  // load:boolean=false;
   q:any;
   same(p){
     this.q=p; 
@@ -103,6 +105,7 @@ export class AppComponent {
   }
   showSuggestions(){
     this.sg=true;
+    this.explorer=true;
   }
   clk: boolean;
   optionss: string[] = [];
@@ -116,7 +119,7 @@ export class AppComponent {
     // });
   }
   filteredOptions?: Observable<string[]>;
-  load:boolean=false;
+  // load:boolean=false;
   msg:boolean=false;
   sg:boolean=true;
   term:string="";
@@ -127,6 +130,8 @@ export class AppComponent {
 
   hideSuggestions(){
     this.sg =false;
+    this.explorer=false;
+    this.load=false;
   }
   closeMsg(){
     this.msg=false;
@@ -135,9 +140,12 @@ export class AppComponent {
     this.src=p;
 
   }
+  load:boolean;
   search(value) {
     this.clear();
     this.val1=value;
+    this.present=true;
+
     console.log(value,"checking value received on search")
     if(typeof(value) === 'undefined'){
       this.msg=true;
@@ -221,17 +229,17 @@ export class AppComponent {
 
   register(p,q){
     this.download(q,p);
-this.photoServices.register_download(p).subscribe(
-(  data:any)=>{
-  console.log("some data",data);
-  this.download(q,p);
-},
-(err:any)=>{
-  console.log("error in registering",err);
-}
-)
+// this.photoServices.register_download(p).subscribe(
+// (  data:any)=>{
+//   console.log("some data",data);
+//   this.download(q,p);
+// },
+// (err:any)=>{
+//   console.log("error in registering",err);
+// }
+// )
   }
-
+  explorer=true;
 
   search1() {
     this.search(this.val);
@@ -255,13 +263,20 @@ this.photoServices.register_download(p).subscribe(
     console.log("flterred options:", this.filteredOptions);
   }
 
-  
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.optionss.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+present=false;
+presen(){
+   this.present=false;
+}
+presen1(){
+  this.present=true;
+}
+offsetFlag:boolean=false;
 
   onScroll() { 
     if (this.val && this.val.length > 0) {

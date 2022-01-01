@@ -30,12 +30,16 @@ export class UnsplashService {
 
   // Get Pictures
   getPhotos(q:string):Observable<any> {
-    if (this.prevKeyword === q) {
-      this.currPage++;
-    } else {
+    if (this.prevKeyword != q) {
       this.currPage = 1;
+    } 
+    
+    else if (this.prevKeyword === q) {
+      this.currPage++;
+
     }
     this.prevKeyword = q;
+    
     return this.http.get<any>(`${this.base_url}
                                   page=${this.currPage}
                                   &per_page=${this.per_page}
