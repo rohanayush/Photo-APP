@@ -45,14 +45,12 @@ overflow:auto;
 input[type="text"], textarea {
 
   background-color : white; 
-  padding:1rem;
+  padding:3px;
   border-radius:12px;
 
 }
 /* color collection #C0A68C */
-body{
-    background: #FF9CDC;  
-}
+
 .contain{
     justify-content: center;
     display: flex;
@@ -82,20 +80,6 @@ body{
 a{
   text-decoration: none;
 }
-img{
-    /* width: 100%; */
-
-    object-fit:scale-down ;
-    width:90%;
-    /* height:90%; */
-    /* border:1px solid red; */
-        /* object-fit: cover; */
-        /* width: 80%;   */
-    text-align: center;
-       height: 90%;
-        /* justify-content: center; */
-}
-
 
 img:hover{
     transform: scale(1.1,1.1) ;
@@ -344,7 +328,7 @@ li{
     display: none;
   }
   .choices{
-    height: 40vh;
+    height: 35vh;
   }
   
 }
@@ -446,7 +430,7 @@ li{
 }
   .choices{
     position: fixed;
-    top:20%;
+    top:16%;
     left:35%;
     width:70%;
     /* border:3px solid rgb(82, 218, 236); */
@@ -469,7 +453,7 @@ li{
     margin-top: 15px;
 
     z-index:900;
-    height:60vh;
+    height:50vh;
     transition: width 0.4s ease,height 0.4s ease;
 
     background: rgba(255, 255, 255, 0.1);
@@ -555,7 +539,7 @@ li{
   }
   .delete{
     position:fixed;
-    bottom:-5%;
+    bottom:0%;
     z-index: 5001;
     float:6%;
   }
