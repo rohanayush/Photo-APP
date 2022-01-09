@@ -1,4 +1,4 @@
-<body>
+<body >
   
 <div *ngIf="load" class="loader">
   <!-- <img src="assets/magic.jpg" width="200" height="200"> -->
@@ -36,9 +36,13 @@
           <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
         search
       </mat-icon> -->
+      <!-- cross button to clear all -->
+      
+      <!-- <input value="-" type="button" class="btn min" (click)="presen1()"> -->
           <input type="submit" value="🔍" class="btn"
             style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
-            <span value="-" type="button" class="btn min" style="position:relative;margin-left:1px;word-wrap:break-word;" (click)="presen1()"></span>
+            <span class="min" (click)="presen1()" >-</span>
+           
           
 
         </form>
@@ -79,18 +83,18 @@
   <!-- creating validation msges -->
 
 
-
+<!-- background:url({{src}},0.8); -->
   <div class="row contain" 
-    style="background:url({{src}},0.8);overflow: auto;object-fit:cover;transition: background 4.9s ease;"
+    style="background:url({{src}},0.8);overflow: auto;object-fit:fill;transition: background 4.9s ease;"
     *ngFor="let pos of arrQuery">
     <!-- class="row my-row justify-content-around" -->
-    <div data-aos="zoom-out-down" data-aos-duration="700" class="col-md-8 col-sm-10 col-xs-11 col-lg-4 m-3"
-      style="background-color: {{p.color}};border-radius:11px;" *ngFor="let p of pos; let i=index"
+    <div data-aos="zoom-out-down" data-aos-duration="700" class="img-col col-md-9 col-sm-10 col-xs-11 col-lg-3 m-4"
+      style="background-color: {{p.color}};border-radius:11px;text-align:center;padding:1rem; " *ngFor="let p of pos; let i=index"
       (mouseenter)="processColor(p)">
       <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
 
 
-      <img src="{{p.urls.small}}" />
+      <img   src="{{p.urls.small}}" />
 
 
       <button class="sideways btn" (click)="dialog(p)" style="background-color: {{p.color}};">
@@ -103,15 +107,17 @@
           <li (click)="register(p,p.urls.regular)">Regular</li>
           <li (click)="register(p,p.urls.raw)">Raw</li>
           <li (click)="register(p,p.urls.small)">Small</li>
-          <li (click)="setWallpaper(p.urls.regular)">Set as Background</li>
+          <li (click)="setWallpaper(p.urls.regular)">Set Picture as Background</li>
+          <!-- <li (click)="setWallpaper(p.color)">Set Color as Background</li> -->
+
         </ul>
 
       </div>
 
       <!-- hover details -->
       <div class="info" (click)="info(p)">
-        <button class="btn" style="font-size:5px;">
-          <mat-icon [ngStyle]="{'box-shadow':' 2px 2px 2px 2px white'}">info</mat-icon>
+        <button class="btn" style="font-size:5px;border-radius: 12px;">
+          <mat-icon [ngStyle]="{'box-shadow':' 2px 2px 2px 2px white'}"   >info</mat-icon>
         </button>
       </div>
 
@@ -129,7 +135,7 @@
 
       </div>
     </div>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
       (scrolled)="onScroll()">
     </div>
   </div>

@@ -1,4 +1,8 @@
+/* color collection
+#C08C73
 
+
+*/
 .navvv{
   width:100%;
 
@@ -11,6 +15,12 @@
   background: rgb(169, 197, 219);
   /* margin-bottom: 30px; */
   /* height:5%; */
+}
+body{
+  background: url("~src/assets/wall.jpg") ;
+  object-fit:scale-down;
+background-repeat: repeat;
+background-size: contain;
 }
 .body{
 background: url("~src/assets/wall.jpg") ;
@@ -47,10 +57,11 @@ input[type="text"], textarea {
   background-color : white; 
   padding:3px;
   border-radius:12px;
-
 }
 /* color collection #C0A68C */
-
+.img-col{
+  box-shadow:12px 12px black;
+}
 .contain{
     justify-content: center;
     display: flex;
@@ -61,9 +72,12 @@ input[type="text"], textarea {
     /* position: absolute; */
     top:32%;
    
-    overflow:auto;
+    /* overflow:auto; */
   background:black;
 
+}
+.m-5 >img{
+  object-fit: scale-down;
 }
 /* not working */
 @keyframes appear {
@@ -98,7 +112,6 @@ img:hover{
     right:0;
    
     z-index:399;
-
 }
 /* apple inc website color rgb(215, 208, 190) */
 .btnn{
@@ -320,13 +333,15 @@ li{
 .min{
   background:rgb(170, 168, 168);
   visibility: visible;
-  display: block;
+  display: fixed;
+  bottom: 15% ;
+  right:10%;
 }
 @media (max-width:600px) {
-  .min{
+  /* .min{
     visibility: none;
     display: none;
-  }
+  } */
   .choices{
     height: 35vh;
   }
@@ -458,7 +473,34 @@ li{
 
     background: rgba(255, 255, 255, 0.1);
     border:3px solid silver;
+    /* scrollbar-3dlight-color: #15771a; */
+    
+    scrollbar-color:inherit;
+    /* box-shadow: 12px 12px black; */
+
   }
+  /* scrollbar css */
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #444343; 
+  }
+  /* scrollbar css */
 
   .cardbox{
     /* box-shadow: 2px 2px 2px 2px grey; */
