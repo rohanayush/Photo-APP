@@ -59,6 +59,12 @@ export class AppComponent {
     this.val1="";
     this.sg_arr=this.sg_dup;
   }
+  clear1(){
+    this.arrQuery=[];
+    this.showSuggestions();
+    this.val1="";
+    this.sg_arr=this.sg_dup;
+  }
   dlg:boolean=false;
   dialog(p){
     if(this.q != p){
@@ -148,6 +154,9 @@ export class AppComponent {
 
   }
   load:boolean;
+  eraseAll(){
+    
+  }
   search(value) {
     this.clear();
     this.val1=value;

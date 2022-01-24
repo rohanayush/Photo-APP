@@ -6,14 +6,14 @@
 <div class="body">
   <div class="" >
     <div class="navvv" id="section1" >
-      <div class="title">
+      <div class="title" (click)="clear1()">
         <h2>Photo<span>Wizard 🪄</span></h2>
       </div>
 
     </div>
 
 <div class="wall">
-  <img src="assets/wall.jpg">
+  <!-- <img src="assets/wall3.jpg"> -->
 </div>
 
 
@@ -24,7 +24,8 @@
             <mat-label>Search for pictures</mat-label>
             <input type="text" #query placeholder="put your query" aria-label="Number" matInput
               [formControl]="myControl" [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val"
-              [(ngModel)]="val">
+              [(ngModel)]="val">  
+              <!-- <span class="erase" (click)="eraseAll()"> x </span> -->
             <!-- <div style="z-index:2400"> -->
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -40,8 +41,8 @@
       
       <!-- <input value="-" type="button" class="btn min" (click)="presen1()"> -->
           <input type="submit" value="🔍" class="btn"
-            style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
-            <span class="min" (click)="presen1()" >-</span>
+            style="position:relative;left:0;margin-bottom: 93px;margin-left:5px; background: rgb(240, 240, 240);;padding:0.3rem">
+            <span class="min" (click)="presen1()" >⬅️</span>
            
           
 
@@ -55,7 +56,7 @@
 
     <div *ngIf="sg" (click)="hideSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
 
-      <span> Hide Sugestions</span>
+      <span> Hide Suggestions</span>
     </div>
     <div *ngIf="!sg" (click)="showSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
       <span> Show Sugestions</span>
@@ -146,7 +147,7 @@
     💫
    </button>
  
-  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;background:#DEDFE1"
+  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:10px;background:#DEDFE1"
     (click)="clear()">
     <mat-icon [ngStyle]="{'color':'red'}">delete</mat-icon>
   </button>
