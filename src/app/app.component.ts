@@ -55,13 +55,13 @@ export class AppComponent {
   val1="🕵️"
   clear(){
     this.arrQuery=[];
-    this.Suggestions();
+    this.hideSuggestions();
     this.val1="";
     this.sg_arr=this.sg_dup;
   }
   clear1(){
     this.arrQuery=[];
-    this.showSuggestions();
+    this.Suggestions();
     this.val1="";
     this.sg_arr=this.sg_dup;
   }
