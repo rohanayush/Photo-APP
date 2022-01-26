@@ -91,14 +91,14 @@ export class AppComponent {
         if(obj.alt_description!= null){
           this.load=false;
         saveAs(d, obj.alt_description.toString()+".jpg");
-        this.message="File"+obj.alt_description.toString()+".jpg" +" is being downloaded!"
+        this.message=""+obj.alt_description.toString()+".jpg" +" is being downloaded!"
         this.msging=true;
 
         }
         else if(obj.alt_description == null){
           saveAs(d, "image.toString()"+".jpg");
           this.load=false;
-         this.message="File"+"image"+".jpg" +" is being downloaded!"
+         this.message=""+"image"+".jpg" +" is being downloaded!"
           this.msging=true;
           }
       // URL.revokeObjectURL(url);
@@ -175,6 +175,8 @@ export class AppComponent {
   search(value) {
     this.clear();
     this.val1=value;
+    this.val =this.val1;
+
     this.present=true;
 
     console.log(value,"checking value received on search")
@@ -193,7 +195,10 @@ export class AppComponent {
       (resp: any) => {
       console.log("resp",resp)
       this.load=false;
-
+      if(resp.length===0){
+        this.message="Could not find any image! Please search for some other term"
+          this.msging=true;
+      }
       this.arrQuery.push(resp.results);
       console.log("results",resp.results);
     },
@@ -268,7 +273,8 @@ export class AppComponent {
   recData(data){
     this.sg_arr=[];
     for (var i=0; i < data.length; i++){
-      this.sg_arr.push(data[i].title)
+      if(this.sg_arr.indexOf(data[i].title) === -1){
+      this.sg_arr.push(data[i].title)}
     }
     console.log("in rec data sg_arr",this.sg_arr)
   }

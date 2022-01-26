@@ -11,10 +11,9 @@
   /* position: fixed; */
   
   padding-top:-10px;
-  /* background-color: rgb(25, 48, 110); */
+
   background: rgb(169, 197, 219);
-  /* margin-bottom: 30px; */
-  /* height:5%; */
+  
 }
 body{
   background: url("~src/assets/wall3.jpg") ;
@@ -289,6 +288,8 @@ li{
     /* margin-top: 830px; */
     position: fixed;
      text-align: center;
+     /* text-align: ; */
+     /* left:45%; */
      bottom:-5%;
     /* position: fixed; */
 
@@ -302,6 +303,21 @@ li{
     /* margin-bottom: 30px; */
     padding: 10px;
     z-index:50001;
+    animation: input 0.5s ease ;
+}
+@keyframes input {
+  0%{
+   /* left:0%; */
+   /* text-align: left; */
+   bottom:5%;
+
+
+  }
+  100%{
+  /* left:0%; */
+
+
+  }
 }
 
 .loading{
@@ -558,7 +574,8 @@ li{
 }
 @keyframes wrap {
   0%{
-     top:0;
+     width:0;
+     height:0;
   }
   100%{
 
@@ -574,7 +591,7 @@ li{
   background:linear-gradient(rgba(238,130,238,0.8), grey);
   border-radius:10%;  
     word-break: keep-all;
-  animation: wrap 0.7s ease;
+  animation: wrap 0.5s ease;
 
 }
 /* 
@@ -692,19 +709,25 @@ filter: alpha(opacity=80);
     position:fixed;
     bottom:0%;
     z-index: 5001;
-    float:6%;
+    /* float:6%; */
+    left:0%;
+    display: flex;
     margin:3px;
-    animation: buttons 1.3s ease;
+    animation: buttons 0.5s ease;
   }
   @keyframes buttons {
     0%{
-      right:0;
-
+     left:70%;
+     bottom:0%;
+     display: flex;
     }
     100%{
-
+    left:0%;
+    bottom:0%;
+     display: flex;
     }
   }
+
   .topic{
     position:absolute;
     top:20%;

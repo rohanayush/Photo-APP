@@ -138,11 +138,11 @@ padding:10px;" (click)="dismissMsg()">
           <div class="img-box " *ngIf="img_box && p===q" style="background-color: {{p_color}}; z-index:104">
             <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
             <p>Photo by <a href={{url_author}}><span
-                  style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">{{p.user.first_name}}&nbsp;{{p.user.last_name}}</span></a>
-              on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"><span
-                  style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">Unsplash</span></a>
+                  style="background-color: white;color: {{p_color}};padding:0.1rem;font-weight:bold;border-radius:12px">{{p.user.first_name}}&nbsp;{{p.user.last_name}}</span></a>
+                  <br> <br> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"><span
+                  style="background-color: rgb(71, 70, 70);color: white;padding:0.1rem;font-weight:bold;border-radius:5px;margin:0.2rem">Unsplash</span></a>
             </p>
-            <h2>{{p.alt_description}}</h2>
+            <h2 >" {{p.alt_description | uppercase}} " </h2>
             <p>{{p.description}}</p>
 
 
