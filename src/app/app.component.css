@@ -363,7 +363,7 @@ li{
   background:rgb(51, 50, 50);
   border-radius:12px;
   padding:0.3rem;
-
+  cursor: pointer;
 }
 @media (max-width:600px) {
   /* .min{
@@ -376,10 +376,11 @@ li{
   
 }
 .loader {
-    top:30%;
-    left:40%;
+  background:linear-gradient(white,gray);
+    top:-25%;
+    left:33%;
     text-align: center;
-    color: #15771a;
+    color: #e2e5e2;
     font-size: 90px;
     text-indent: -9999em;
     overflow: hidden;
@@ -394,6 +395,7 @@ li{
     -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     font-size: 45px;
+    /* margin-bottom:50px; */
   }
   @-webkit-keyframes load6 {
     0% {
@@ -534,7 +536,76 @@ li{
     background: #444343; 
   }
   /* scrollbar css */
+.inp-style{
+  background: rgb(41, 41, 41);
+  color:white;
+}
+.wrap{
+  position:fixed;
+  top:40%;
+  left:30%;
+  z-index:99999999999;
+  cursor: pointer;
+}
+.wrap1{
+  cursor: pointer;
 
+  position:fixed;
+  top:40%;
+  left:18%;
+  z-index:99999999999;
+
+}
+@keyframes wrap {
+  0%{
+     top:0;
+  }
+  100%{
+
+  }
+  
+}
+.wait{
+/*   display:table; */
+  position:relative;
+   width:150px;
+  height:130px;
+/*   text-align:center; */
+  background:linear-gradient(rgba(238,130,238,0.8), grey);
+  border-radius:10%;  
+    word-break: keep-all;
+  animation: wrap 0.7s ease;
+
+}
+/* 
+for keeping background opacity without rgba
+filter: alpha(opacity=80);
+
+ -moz-opacity: 0.8;
+
+ opacity: 0.8; */
+.wait1{
+  /*   display:table; */
+    position:relative;
+     width:80%;
+    height:230px;
+  animation: wrap 0.7s ease;
+
+  /*   text-align:center; */
+    background:linear-gradient(rgba(238,130,238,0.4), grey);
+    /* background:linear-gradient((green,0.4), grey); */
+
+    border-radius:10%;  
+      word-break: keep-all;
+  }
+.wait1 >span{
+   color:rgba(0,0,0,0.6);
+   position:absolute;
+  top:50%;
+  width:90%;
+ transform:translateY(-50%);
+  padding-left: 17% ;
+}
   .cardbox{
     /* box-shadow: 2px 2px 2px 2px grey; */
     /* position: absolute; */
@@ -623,7 +694,16 @@ li{
     z-index: 5001;
     float:6%;
     margin:3px;
+    animation: buttons 1.3s ease;
+  }
+  @keyframes buttons {
+    0%{
+      right:0;
 
+    }
+    100%{
+
+    }
   }
   .topic{
     position:absolute;
@@ -634,14 +714,34 @@ li{
 
 
   }
-  @media  (max-width:500px) {
+  @media  (max-width:760px) {
     .cardbox{
-      margin-left:-2px;
+      margin-left:-15px;
     }
     
   }
 @media (min-width:768px){
   .cardbox{
     margin-left:35px;
+  }
+ 
+}
+@media (min-width:750px) and (max-width:850px){
+  .wrap{
+    left:40%;
+  }
+  .wrap1{
+    left:40%;
+  }
+}
+@media (min-width:851px){
+  .wrap{
+    left:47%;
+  }
+  .wrap1{
+    left:47%;
+  }
+  .appear{
+    padding-left: 6%;
   }
 }

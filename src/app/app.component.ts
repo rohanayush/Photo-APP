@@ -55,7 +55,7 @@ export class AppComponent {
   val1="🕵️"
   clear(){
     this.arrQuery=[];
-    this.hideSuggestions();
+    this.Suggestions();
     this.val1="";
     this.sg_arr=this.sg_dup;
   }
@@ -79,6 +79,9 @@ export class AppComponent {
     this.same(p);
 
   }
+  dismissMsg(){
+    this.msging=false;
+  }
   download(url,obj){
     console.log("object in download ",obj);
     this.http.get(url,{ responseType: 'blob' }).subscribe(
@@ -86,14 +89,25 @@ export class AppComponent {
         console.log("image url data",d);
         // const url = URL.createObjectURL(d);
         if(obj.alt_description!= null){
+          this.load=false;
         saveAs(d, obj.alt_description.toString()+".jpg");
+        this.message="File"+obj.alt_description.toString()+".jpg" +" is being downloaded!"
+        this.msging=true;
+
         }
         else if(obj.alt_description == null){
-          saveAs(d, "obj.alt_description.toString()"+".jpg");
+          saveAs(d, "image.toString()"+".jpg");
+          this.load=false;
+         this.message="File"+"image"+".jpg" +" is being downloaded!"
+          this.msging=true;
           }
       // URL.revokeObjectURL(url);
       },
       (err:any)=>{
+        this.load=false;
+         this.message="Some error ocurred!"
+          this.msging=true;
+            
         console.log("error",err)
       }
     )
@@ -157,6 +171,7 @@ export class AppComponent {
   eraseAll(){
     
   }
+  processing:boolean;
   search(value) {
     this.clear();
     this.val1=value;
@@ -184,9 +199,10 @@ export class AppComponent {
     },
     (err:any)=>{
   this.load=false;
-
+  this.message="Some error ocurred!"
+  this.msging=true;
       console.log("error in search",err);
-      alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
+      // alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
   }
 }
@@ -212,8 +228,11 @@ export class AppComponent {
 
 
   }
+  message:string="";
+  msging=false;
   recommendValue() {
     // this.arrQuery = [];
+    this.load=true;
    if(this.val1){
     console.log("value", this.val)
 
@@ -222,9 +241,15 @@ export class AppComponent {
         console.log(data);
         this.recData(data);
         this.Suggestions();
-
+    this.load=false;
+        
       },
       error => {
+    this.load=false;
+    this.message ="Recommendation could not be fetched for current screen !";
+    this.msging =true;
+
+
         console.log("error", error)
       }
     )
@@ -232,6 +257,7 @@ export class AppComponent {
    else{
     //  alert("value not set");
      this.Suggestions();
+     this.load=false;
    }
     // this.setData(value);
     // this.search(value);
@@ -278,6 +304,7 @@ export class AppComponent {
 
 
   register(p,q){
+    this.load =true;
     this.download(q,p);
 // this.photoServices.register_download(p).subscribe(
 // (  data:any)=>{
@@ -335,6 +362,8 @@ offsetFlag:boolean=false;
           this.arrQuery.push(data.results);
         },
         (error:any)=>{
+          this.message="Some error ocurred!"
+          this.msging=true;
         }
       )
     }

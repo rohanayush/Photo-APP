@@ -1,166 +1,181 @@
-<body >
-  
-<div *ngIf="load" class="loader">
-  <!-- <img src="assets/magic.jpg" width="200" height="200"> -->
-</div>
-<div class="body">
-  <div class="" >
-    <div class="navvv" id="section1" >
-      <div class="title" (click)="clear1()">
-        <h2>Photo<span>Wizard 🪄</span></h2>
+<body>
+
+
+  <div class="body">
+    <div class="">
+      <div class="navvv" id="section1">
+        <div class="title" (click)="clear1()">
+          <h2>Photo<span>Wizard 🪄</span></h2>
+        </div>
+
       </div>
-
-    </div>
-
-<div class="wall">
-  <!-- <img src="assets/wall3.jpg"> -->
+<div class="wrap1" *ngIf="!load &&  msging">
+ <div class="wait1" style="
+padding:10px;" (click)="dismissMsg()">
+ {{message}}
+ <p style="font-size: 15px;background:#262626;color:white;padding:6px;position:absolute;bottom:3%;border-radius:12px">Tap me anywhere to dismiss me</p>
+   </div>
 </div>
+      <div class="wrap" *ngIf="load">
+        <div class="wait">
+          <div *ngIf="load" class=" loader">
+          </div>
+          
+        </div>
+      </div>
+        <div class="wall">
+          <!-- <img src="assets/wall3.jpg"> -->
+        </div>
 
 
-      <div class="center" *ngIf="!present">
-        
-        <form (ngSubmit)="search(val)">
-           <mat-form-field>
-            <mat-label>Search for pictures</mat-label>
-            <input type="text" #query placeholder="put your query" aria-label="Number" matInput
-              [formControl]="myControl" [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val"
-              [(ngModel)]="val">  
+        <div class="center" *ngIf="!present">
+
+          <form (ngSubmit)="search(val)">
+            <mat-form-field>
+              <mat-label>Search for pictures</mat-label>
+              <input type="text" #query placeholder="put your query" aria-label="Number" matInput
+                [formControl]="myControl" [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val"
+                [(ngModel)]="val">
               <!-- <span class="erase" (click)="eraseAll()"> x </span> -->
-            <!-- <div style="z-index:2400"> -->
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option}}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- </div> -->
-          </mat-form-field>
-          <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
+              <!-- <div style="z-index:2400"> -->
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <!-- </div> -->
+            </mat-form-field>
+            <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
         search
       </mat-icon> -->
-      <!-- cross button to clear all -->
-      
-      <!-- <input value="-" type="button" class="btn min" (click)="presen1()"> -->
-          <input type="submit" value="🔍" class="btn"
-            style="position:relative;left:0;margin-bottom: 93px;margin-left:5px; background: rgb(240, 240, 240);;padding:0.3rem">
-            <span class="min" (click)="presen1()" >⬅️</span>
-           
-          
+            <!-- cross button to clear all -->
 
-        </form>
-        
+            <!-- <input value="-" type="button" class="btn min" (click)="presen1()"> -->
+            <input type="submit" value="🔍" class="btn"
+              style="position:relative;left:0;margin-bottom: 93px;margin-left:5px; background: rgb(240, 240, 240);;padding:0.3rem;cursor: pointer;">
+            <span class="min" (click)="presen1()">⬅️</span>
+
+
+
+          </form>
+
+        </div>
       </div>
-  </div>
 
-  <!-- Creating basic blocks of choices to fill the gaps -->
-  <div class="choices row" *ngIf="explorer">
+      <!-- Creating basic blocks of choices to fill the gaps -->
+      <div class="choices row" *ngIf="explorer">
 
-    <div *ngIf="sg" (click)="hideSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
+        <div *ngIf="sg" (click)="hideSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
 
-      <span> Hide Suggestions</span>
-    </div>
-    <div *ngIf="!sg" (click)="showSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
-      <span> Show Sugestions</span>
-      <!-- <span *ngIf="!sg && arrQuery.length!=0"> Showing results for {{term}} </span> -->
-      <!-- <span *ngIf="!sg" style="color:purple" > Showing results for {{term}} </span> -->
+          <span> Hide Suggestions</span>
+        </div>
+        <div *ngIf="!sg" (click)="showSuggestions()" class="col-md-10 col-sm-10 col-xs-11 col-lg-10 detail">
+          <span> Show Sugestions</span>
+          <!-- <span *ngIf="!sg && arrQuery.length!=0"> Showing results for {{term}} </span> -->
+          <!-- <span *ngIf="!sg" style="color:purple" > Showing results for {{term}} </span> -->
 
-    </div>
-    <div *ngIf="sg" class="row appear">
-      <div *ngFor="let o of sg_arr;let i=index" class="cardbox col-md-8 col-sm-11 col-xs-12 col-lg-5 "
-        (click)="search(o)">
-        <span class="text">
-         {{o}}
-        </span>
-        <!-- <img src="{{o.resp}}"> -->
+        </div>
+        <div *ngIf="sg" class="row appear">
+          <div *ngFor="let o of sg_arr;let i=index" class="cardbox col-md-8 col-sm-11 col-xs-12 col-lg-5 "
+            (click)="search(o)">
+            <span class="text">
+              {{o}}
+            </span>
+            <!-- <img src="{{o.resp}}"> -->
+          </div>
+        </div>
+      </div>
+      <!-- Creating basic blocks of choices to fill the gaps -->
+
+      <!-- creating validation msges -->
+      <div class="msg" *ngIf="msg">
+        Please Enter a valid search term to continue. Thanks :) <button class="btn" style="color: white;border:none"
+          (click)="closeMsg()">X</button>
+      </div>
+      <!-- creating validation msges -->
+
+
+      <!-- background:url({{src}},0.8); -->
+      <div class="row contain"
+        style="background:url({{src}},0.8);overflow: auto;object-fit:fill;transition: background 4.9s ease;"
+        *ngFor="let pos of arrQuery">
+        <!-- class="row my-row justify-content-around" -->
+        <div data-aos="zoom-out-down" data-aos-duration="700" class="img-col col-md-9 col-sm-10 col-xs-11 col-lg-3 m-4"
+          style="background-color: {{p.color}};border-radius:11px;text-align:center;padding:1rem; "
+          *ngFor="let p of pos; let i=index" (mouseenter)="processColor(p)">
+          <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
+
+
+          <img src="{{p.urls.small}}" />
+
+
+          <button class="sideways btn" (click)="dialog(p)" style="background-color: {{p.color}};">
+            <mat-icon [ngStyle]="{'color':'green'}">arrow_downward</mat-icon>
+          </button>
+          <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
+            <!-- <span class="cross" (click)="setDialog()">close</span> -->
+            <ul>
+              <li style="background: transparent;"> Download options</li>
+              <li (click)="register(p,p.urls.full) ">Full</li>
+              <li (click)="register(p,p.urls.regular)">Regular</li>
+              <li (click)="register(p,p.urls.raw)">Raw</li>
+              <li (click)="register(p,p.urls.small)">Small</li>
+              <!-- <li (click)="setWallpaper(p.urls.regular)">Set Picture as Background</li> -->
+              <!-- <li (click)="setWallpaper(p.color)">Set Color as Background</li> -->
+
+            </ul>
+
+          </div>
+
+          <!-- hover details -->
+          <div class="info" (click)="info(p)">
+            <button class="btn" style="font-size:5px;border-radius: 12px;">
+              <mat-icon [ngStyle]="{'box-shadow':' 2px 2px 2px 2px white'}">info</mat-icon>
+            </button>
+          </div>
+
+
+          <div class="img-box " *ngIf="img_box && p===q" style="background-color: {{p_color}}; z-index:104">
+            <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
+            <p>Photo by <a href={{url_author}}><span
+                  style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">{{p.user.first_name}}&nbsp;{{p.user.last_name}}</span></a>
+              on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"><span
+                  style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">Unsplash</span></a>
+            </p>
+            <h2>{{p.alt_description}}</h2>
+            <p>{{p.description}}</p>
+
+
+          </div>
+        </div>
+        <div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+          (scrolled)="onScroll()">
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Creating basic blocks of choices to fill the gaps -->
 
-  <!-- creating validation msges -->
-  <div class="msg" *ngIf="msg">
-    Please Enter a valid search term to continue. Thanks :) <button class="btn" style="color: white;border:none"
-      (click)="closeMsg()">X</button>
-  </div>
-  <!-- creating validation msges -->
-
-
-<!-- background:url({{src}},0.8); -->
-  <div class="row contain" 
-    style="background:url({{src}},0.8);overflow: auto;object-fit:fill;transition: background 4.9s ease;"
-    *ngFor="let pos of arrQuery">
-    <!-- class="row my-row justify-content-around" -->
-    <div data-aos="zoom-out-down" data-aos-duration="700" class="img-col col-md-9 col-sm-10 col-xs-11 col-lg-3 m-4"
-      style="background-color: {{p.color}};border-radius:11px;text-align:center;padding:1rem; " *ngFor="let p of pos; let i=index"
-      (mouseenter)="processColor(p)">
-      <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
-
-
-      <img   src="{{p.urls.small}}" />
-
-
-      <button class="sideways btn" (click)="dialog(p)" style="background-color: {{p.color}};">
-        <mat-icon [ngStyle]="{'color':'green'}">arrow_downward</mat-icon>
+    <div class="delete" *ngIf="present">
+      <button class="btn"
+        style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#4a7fe9;word-wrap:break-word;"
+        (click)="recommendValue()">
+        💫
       </button>
-      <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
-        <!-- <span class="cross" (click)="setDialog()">close</span> -->
-        <ul>
-          <li (click)="register(p,p.urls.full) ">Full</li>
-          <li (click)="register(p,p.urls.regular)">Regular</li>
-          <li (click)="register(p,p.urls.raw)">Raw</li>
-          <li (click)="register(p,p.urls.small)">Small</li>
-          <li (click)="setWallpaper(p.urls.regular)">Set Picture as Background</li>
-          <!-- <li (click)="setWallpaper(p.color)">Set Color as Background</li> -->
 
-        </ul>
-
-      </div>
-
-      <!-- hover details -->
-      <div class="info" (click)="info(p)">
-        <button class="btn" style="font-size:5px;border-radius: 12px;">
-          <mat-icon [ngStyle]="{'box-shadow':' 2px 2px 2px 2px white'}"   >info</mat-icon>
-        </button>
-      </div>
-
-
-      <div class="img-box " *ngIf="img_box && p===q" style="background-color: {{p_color}}; z-index:104">
-        <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
-        <p>Photo by <a href={{url_author}}><span
-              style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">{{p.user.first_name}}&nbsp;{{p.user.last_name}}</span></a>
-          on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"><span
-              style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">Unsplash</span></a>
-        </p>
-        <h2>{{p.alt_description}}</h2>
-        <p>{{p.description}}</p>
-
-
-      </div>
-    </div>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
-      (scrolled)="onScroll()">
-    </div>
-  </div>
-</div>
-
-<div class="delete" *ngIf="present">
-  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#4a7fe9;word-wrap:break-word;" (click)="recommendValue()">
-    💫
-   </button>
- 
-  <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:10px;background:#DEDFE1"
-    (click)="clear()">
-    <mat-icon [ngStyle]="{'color':'red'}">delete</mat-icon>
-  </button>
-  <!-- <a href="#section1"><button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
+      <button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:10px;background:#DEDFE1"
+        (click)="clear()">
+        <mat-icon [ngStyle]="{'color':'red'}">delete</mat-icon>
+      </button>
+      <!-- <a href="#section1"><button class="btn" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
    
       <mat-icon [ngStyle]="{'color':'blue'}">arrow_upward</mat-icon>
     
   </button></a> -->
 
-  <button class="btn"(click)="presen()" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
- 
-    🔍{{val1}}
- 
-</button>
-</div>
+      <button class="btn" (click)="presen()"
+        style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;background:#DEDFE1">
+
+        🔍{{val1}}
+
+      </button>
+    </div>
 </body>
