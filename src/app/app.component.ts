@@ -23,7 +23,6 @@ export class AppComponent {
               a["resp"]="https://source.unsplash.com/random/700x700/?"+this.sg_arr[i];
               this.sg_arr1.push(a);
             }
-            console.log("aray",this.sg_arr1);
             this.sg_dup=this.sg_arr;
 
   }
@@ -34,7 +33,6 @@ export class AppComponent {
   src:string="";
   processColor(c) {
     this.p_color=c.color;
-    console.log("color reached",c.color);
     var cc = c.color.substring(1,);      // strip #
     var rgb = parseInt(cc, 16);   // convert rrggbb to decimal
     var r = (rgb >> 16) & 0xff;  // extract red
@@ -42,10 +40,8 @@ export class AppComponent {
     var b = (rgb >> 0) & 0xff;  // extract blue
 
     var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-    console.log("luma",luma);
     if (luma > 240) {
       this.p_color="rgb(149, 146, 142)";    
-    console.log("color made",this.p_color);
       
       // pick a different colour
     }
@@ -71,7 +67,6 @@ export class AppComponent {
       this.dlg=false;
       this.q=p;
     }
-    console.log(this.dlg)
     this.dlg=!this.dlg;
     if(this.dlg){
       this.img_box =false;
@@ -83,10 +78,8 @@ export class AppComponent {
     this.msging=false;
   }
   download(url,obj){
-    console.log("object in download ",obj);
     this.http.get(url,{ responseType: 'blob' }).subscribe(
       (d:any)=>{
-        console.log("image url data",d);
         // const url = URL.createObjectURL(d);
         if(obj.alt_description!= null){
           this.load=false;
@@ -108,7 +101,6 @@ export class AppComponent {
          this.message="Some error ocurred!"
           this.msging=true;
             
-        console.log("error",err)
       }
     )
   
@@ -122,7 +114,6 @@ export class AppComponent {
     this.dlg=false;
   }
   showDetails(adv: any) {
-    console.log(adv);
     this.clk = true;
   }
   showSuggestions(){
@@ -179,10 +170,8 @@ export class AppComponent {
 
     this.present=true;
 
-    console.log(value,"checking value received on search")
     if(typeof(value) === 'undefined'){
       this.msg=true;
-      console.log("Reached inside null and value of msg is:",this.msg)
 
     }
     else if(typeof(value) != 'undefined'){
@@ -206,7 +195,6 @@ export class AppComponent {
   this.load=false;
   this.message="Some error ocurred!"
   this.msging=true;
-      console.log("error in search",err);
       // alert("Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)");
     });
   }
@@ -215,11 +203,9 @@ export class AppComponent {
   sendValue(value: any) {
     // this.arrQuery = [];
 
-    console.log("value", value)
 
     this.http.post(this.url + "/suggest", value).subscribe(
       (data: any) => {
-        console.log(data);
         this.setData(data);
 
 
@@ -243,7 +229,6 @@ export class AppComponent {
 
     this.http.post(this.url + "/suggest", this.val1).subscribe(
       (data: any) => {
-        console.log(data);
         this.recData(data);
         this.Suggestions();
     this.load=false;
@@ -255,7 +240,6 @@ export class AppComponent {
     this.msging =true;
 
 
-        console.log("error", error)
       }
     )
    }
@@ -276,7 +260,6 @@ export class AppComponent {
       if(this.sg_arr.indexOf(data[i].title) === -1){
       this.sg_arr.push(data[i].title)}
     }
-    console.log("in rec data sg_arr",this.sg_arr)
   }
   key:string="apJcuP6-W8CWpsM4a3LiI8XPsFEB4NSDV9bsBwgSwO0";
   tail="?utm_source=favourites&utm_medium=referral"
@@ -288,7 +271,6 @@ export class AppComponent {
 
  info(p){
 
-   console.log();
    if(this.q != p)
    {
     this.img_box=false;
@@ -300,7 +282,6 @@ export class AppComponent {
 
    this.head=p.user.links.html.toString();
    this.url_author= this.head+this.tail;
-   console.log("url for author",this.url_author)
    this.img_box=!this.img_box;
    if(this.img_box){
      this.dlg=false;
@@ -336,14 +317,11 @@ export class AppComponent {
     for (var i in dd) {
       this.ddd.push(dd[i].title);
     }
-    console.log("ddd", this.ddd);
     this.optionss = this.ddd;
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
-    console.log("options:", this.optionss);
-    console.log("flterred options:", this.filteredOptions);
   }
 
   private _filter(value: string): string[] {
