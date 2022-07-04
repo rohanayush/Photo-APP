@@ -16,7 +16,7 @@ export class UnsplashService {
   currPage = 50;
    
   //key
-  key:string="apJcuP6-W8CWpsM4a3LiI8XPsFEB4NSDV9bsBwgSwO0";
+  key:string="your key";
   base_url:string="https://api.unsplash.com/search/photos?";
   one_photoUrl:string="https://api.unsplash.com/photos/random/?"
   per_page:string="100";
