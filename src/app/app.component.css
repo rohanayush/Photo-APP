@@ -399,6 +399,10 @@ li{
   /* margin-left: -1rem; */
   padding:10px;
   margin:0 auto;
+  /* position: absolute; */
+  z-index:501;
+  /* width:max-content; */
+  background: black;
 }
   .choices{
     /* position: absolute; */
@@ -416,6 +420,8 @@ li{
     /* padding-left:100px; */
     background: rgb(53, 40, 60);
     background:#23A4C4;
+    background:rgb(58, 57, 57);
+
     color:blanchedalmond;
     /* padding-left:6rem; */
     /* margin-left: 3rem; */

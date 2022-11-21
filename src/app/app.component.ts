@@ -107,10 +107,13 @@ export class AppComponent {
     this.sg=true;
     this.explorer=true;
   }
+  Suggestions(){
+    this.sg=!this.sg;
+  }
   clk: boolean;
   optionss: string[] = [];
 
-  title = 'photoApp';
+  title = 'photoWizard';
   arrQuery = [];
   ngOnInit() {
     // this.photoServices.getPhotos("trees").subscribe((resp: any) => {
