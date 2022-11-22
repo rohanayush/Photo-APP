@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 const httpOptions = {
@@ -23,11 +23,24 @@ export class UnsplashService {
   page:string="1";
   query:string="flowers";
   oneUrl:string="https://source.unsplash.com/random/?"
-
+  resp$ = new BehaviorSubject(1);
+  res:any;
+  fullView$ = new BehaviorSubject(1);
   constructor(private http:HttpClient) { 
     
   }
+  // Full view
+  setFullView(p){
+  this.fullView$.next(p);
+  }
 
+  //Setting response
+  setResponse(value:any){
+    this.res=value;
+    this.resp$.next(value);
+
+    console.log("received from component", this.res);
+  }
   // Get Pictures
   getPhotos(q:string):Observable<any> {
     if (this.prevKeyword != q) {

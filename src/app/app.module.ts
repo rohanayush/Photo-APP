@@ -14,10 +14,19 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SearchComponent } from './components/search/search.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { PictureViewComponent } from './components/picture-view/picture-view.component';
+import { RecommendationsComponent } from './components/recommendations/recommendations.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    GalleryComponent,
+    PictureViewComponent,
+    RecommendationsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     InfiniteScrollModule
   ],
-  providers: [UnsplashService],
+  providers: [UnsplashService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

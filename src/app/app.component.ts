@@ -57,6 +57,7 @@ export class AppComponent {
     this.hideSuggestions();
     this.val1="🕵️";
   }
+  
   dlg:boolean=false;
   dialog(p){
     if(this.q != p){
