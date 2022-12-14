@@ -1,4 +1,4 @@
-<div class="center" *ngIf="!present">
+<div class="center">
         
     <form (ngSubmit)="search(val)">
        <mat-form-field>
@@ -15,11 +15,11 @@
         <!-- </div> -->
       </mat-form-field>
       <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
-    search
+    search (click)="presen1()"
   </mat-icon> -->
       <input type="submit" value="Search" class="btn"
         style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
-        <button class="btn min" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;word-wrap:break-word;" (click)="presen1()">
+        <button class="btn min" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;word-wrap:break-word;" >
           -
          </button>
     </form>

@@ -25,9 +25,14 @@ export class UnsplashService {
   oneUrl:string="https://source.unsplash.com/random/?"
   resp$ = new BehaviorSubject(1);
   res:any;
+  term$ = new BehaviorSubject(1);
   fullView$ = new BehaviorSubject(1);
   constructor(private http:HttpClient) { 
     
+  }
+  // search term
+  searchTerm(q){
+    this.term$.next(q);
   }
   // Full view
   setFullView(p){

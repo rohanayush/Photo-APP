@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,HostListener } from '@angular/core';
 import { UnsplashService } from 'src/app/unsplash.service';
 import { saveAs } from 'file-saver/FileSaver';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'
-
-
+import { Router, NavigationStart} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
@@ -12,24 +11,124 @@ import { Router } from '@angular/router'
   styleUrls: ['./gallery.component.css'],
 })
 export class GalleryComponent implements OnInit {
-  constructor(private unsplashService: UnsplashService, private http: HttpClient, private router:Router) {}
-  resp:any;
+  constructor(
+    private unsplashService: UnsplashService,
+    private http: HttpClient,
+    private router: Router,
+    private activatedRoute:ActivatedRoute
+  ) {
+    router.events
+    .subscribe((event: NavigationStart) => {
+      
+      if (event.navigationTrigger === 'popstate') {
+        // Perform actions
+        if(event.restoredState){
+        //  alert("going back" + this.activatedRoute.snapshot.params['id']);
+          this.lateFunction();
+        }
+        console.log("searched for",this.activatedRoute.snapshot.params['id']);
+        this.unsplashService.term$.subscribe(a => console.log("terms is ", a))
+      }
+    });
+    console.log("search no pop state for",this.activatedRoute.snapshot.params['id']);
+
+  }
+  lateFunction(){
+    setTimeout(() => {
+      // alert(this.activatedRoute.snapshot.params['id']);
+      this.unsplashService.searchTerm(this.activatedRoute.snapshot.params['id']);
+    }, 300);
+  }
+  resp=[];
   p_color: string;
   img_box = false;
   url_author: string;
   tail = '?utm_source=favourites&utm_medium=referral';
   head: string;
+  tempTerm:string;
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log("search no pop state for",this.activatedRoute.snapshot.params['id']);
 
-  ngOnInit(): void {
-    console.log('gallery', this.unsplashService.res);
-    this.unsplashService.resp$.subscribe((a:any)=>{
-      console.log("here a",a);
-      console.log("here a[0",a[0]);
-      this.resp=a;
-      console.log(this.resp);
-    }
-    );
+    console.log('Back button pressed',event);
   }
+  ngOnInit(): void {
+    // alert(this.activatedRoute.snapshot.params['id']);
+    // console.log('gallery', this.unsplashService.res);
+    // this.unsplashService.resp$.subscribe((a: any) => {
+    //   console.log('here a', a);
+    //   console.log('here a[0', a[0]);
+    //   this.resp = a;
+    //   console.log(this.resp);
+    // });
+   this.unsplashService.term$.subscribe(
+    (a)=>{
+      this.resp=[];
+      console.log("a of term",a);
+      this.unsplashService.getPhotos(a.toString()).subscribe(
+        (data)=>{
+         this.resp.push(data.results);
+          this.resp=[...this.resp];
+          console.log(this.resp)
+          console.log("type of", typeof this.resp);
+          
+        });
+    }
+   )
+        // this.unsplashService.getPhotos(this.activatedRoute.snapshot.params['id']).subscribe(
+        //   (data)=>{
+        //     this.resp.push(data.results)
+        //     console.log(this.resp)
+        //   console.log("type of", typeof this.resp);
+
+        //   }
+        // )
+      
+    
+    
+    //       if(term != this.activatedRoute.snapshot.params['id']){
+    //         this.unsplashService.getPhotos(this.activatedRoute.snapshot.params['id']).subscribe(
+    //           (resp:any)=>{
+    //             this.resp.push(resp.results);
+    //             console.log("data as per snapshot",this.resp);
+        
+    //             // resp.results.array.forEach(element => {
+                  
+    //             // });
+    //           }
+    //         )
+    //       }
+    //       else{
+    //         this.unsplashService.getPhotos(term).subscribe(
+    //           (resp:any)=>{
+    //             this.resp.push(resp.results);
+    //             console.log("data as per search",this.resp);
+        
+    //             // resp.results.array.forEach(element => {
+                  
+    //             // });
+    //           }
+    //         )
+    //       }
+    //   }
+    // )
+    
+  }
+  // ngAfterViewInit(){
+  //   this.unsplashService.term$.subscribe(
+  //     (a)=>{
+  //       console.log("a of term",a);
+  //       this.unsplashService.getPhotos(this.activatedRoute.snapshot.params['id']).subscribe(
+  //         (data)=>{
+  //          this.resp.push(data.results);
+  //           this.resp=[this.resp[0],...this.resp];
+  //           console.log(this.resp)
+  //           console.log("type of", typeof this.resp);
+            
+  //         });
+  //     }
+  //   )
+  // }
 
   processColor(c) {
     this.p_color = c.color;
@@ -72,54 +171,51 @@ export class GalleryComponent implements OnInit {
   same(p) {
     this.q = p;
   }
-  dialog(p){
-    if(this.q != p){
-      this.dlg=false;
-      this.q=p;
+  dialog(p) {
+    if (this.q != p) {
+      this.dlg = false;
+      this.q = p;
     }
-    console.log(this.dlg)
-    this.dlg=!this.dlg;
-    if(this.dlg){
-      this.img_box =false;
+    console.log(this.dlg);
+    this.dlg = !this.dlg;
+    if (this.dlg) {
+      this.img_box = false;
     }
     this.same(p);
-
   }
-  register(p,q){
-    this.download(q,p);
-// this.photoServices.register_download(p).subscribe(
-// (  data:any)=>{
-//   console.log("some data",data);
-//   this.download(q,p);
-// },
-// (err:any)=>{
-//   console.log("error in registering",err);
-// }
-// )
+  register(p, q) {
+    this.download(q, p);
+    // this.photoServices.register_download(p).subscribe(
+    // (  data:any)=>{
+    //   console.log("some data",data);
+    //   this.download(q,p);
+    // },
+    // (err:any)=>{
+    //   console.log("error in registering",err);
+    // }
+    // )
   }
-  viewFull(p){
-    console.log("inside full view",p)
+  viewFull(p) {
+    console.log('inside full view', p);
     this.unsplashService.setFullView(p);
-    this.router.navigate(['full-view'])
+    this.router.navigate(['full-view']);
   }
-  download(url,obj){
-    console.log("object in download ",obj);
-    this.http.get(url,{ responseType: 'blob' }).subscribe(
-      (d:any)=>{
-        console.log("image url data",d);
+  download(url, obj) {
+    console.log('object in download ', obj);
+    this.http.get(url, { responseType: 'blob' }).subscribe(
+      (d: any) => {
+        console.log('image url data', d);
         // const url = URL.createObjectURL(d);
-        if(obj.alt_description!= null){
-        saveAs(d, obj.alt_description.toString()+".jpg");
+        if (obj.alt_description != null) {
+          saveAs(d, obj.alt_description.toString() + '.jpg');
+        } else if (obj.alt_description == null) {
+          saveAs(d, 'obj.alt_description.toString()' + '.jpg');
         }
-        else if(obj.alt_description == null){
-          saveAs(d, "obj.alt_description.toString()"+".jpg");
-          }
-      // URL.revokeObjectURL(url);
+        // URL.revokeObjectURL(url);
       },
-      (err:any)=>{
-        console.log("error",err)
+      (err: any) => {
+        console.log('error', err);
       }
-    )
-  
+    );
   }
 }

@@ -1,3 +1,12 @@
 img{
-    margin: 100px;
+ 
+}
+img:hover{
+    transform: scale(1,1) ;
+    transition: 0.8s  transform;
+}
+.full-view{
+    margin:0 auto;
+    height: 100vh;
+    width:100vw;
 }

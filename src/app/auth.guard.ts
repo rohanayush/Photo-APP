@@ -14,6 +14,6 @@ import { UnsplashService } from './unsplash.service';
 export class AuthGuard implements CanActivate {
   constructor(private unsplashService: UnsplashService) {}
   canActivate() {
-    if (this.unsplashService.res) return true;
+    if (this.unsplashService.term$) return true;
   }
 }

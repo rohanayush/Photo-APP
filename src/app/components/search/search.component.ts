@@ -65,26 +65,34 @@ export class SearchComponent implements OnInit {
       this.sg = false;
       this.arrQuery = [];
       this.load = true;
+      this.photoServices.searchTerm(value);
+      this.router.navigate(['gallery/'+value]);
+      // this.photoServices.term$.subscribe(
+      //   (a:any)=>{
+      //     // console.log("term $", )
 
-      this.photoServices.getPhotos(value).subscribe(
-        (resp: any) => {
-          console.log('resp', resp);
-          this.load = false;
-
-          this.arrQuery.push(resp.results);
-          this.photoServices.setResponse(this.arrQuery);
-          console.log('results', resp.results);
-          this.router.navigate(['gallery']);
-        },
-        (err: any) => {
-          this.load = false;
-
-          console.log('error in search', err);
-          alert(
-            'Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)'
-          );
-        }
-      );
+      //     this.photoServices.getPhotos(a).subscribe(
+      //       (resp: any) => {
+      //         console.log('resp', resp);
+      //         this.load = false;
+    
+      //         this.arrQuery.push(resp.results);
+      //         this.photoServices.setResponse(this.arrQuery);
+      //         console.log('results', resp.results);
+              
+      //       },
+      //       (err: any) => {
+      //         this.load = false;
+    
+      //         console.log('error in search', err);
+      //         alert(
+      //           'Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)'
+      //         );
+      //       }
+      //     );
+      //   }
+      // )
+     
     }
   }
 
