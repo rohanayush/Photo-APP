@@ -4,7 +4,7 @@ import { UnsplashService } from 'src/app/unsplash.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {  map, startWith } from 'rxjs/operators';
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-search',
@@ -46,20 +46,27 @@ export class SearchComponent implements OnInit {
   constructor(
     private photoServices: UnsplashService,
     private http: HttpClient,
-    private router:Router
+    private router:Router,
+    
+    private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //console.log("router value",this.activatedRoute.snapshot.params['id'])
+    if(this.activatedRoute.snapshot.params['id'] == undefined){
+      //console.log("caught in search")
+    }
+  }
 
   search(value) {
     // this.clear();
     this.val1 = value;
     // this.present=true;
 
-    console.log(value, 'checking value received on search');
+    //console.log(value, 'checking value received on search');
     if (typeof value === 'undefined') {
       this.msg = true;
-      console.log('Reached inside null and value of msg is:', this.msg);
+      //console.log('Reached inside null and value of msg is:', this.msg);
     } else if (typeof value != 'undefined') {
       this.term = value;
       this.sg = false;
@@ -69,22 +76,22 @@ export class SearchComponent implements OnInit {
       this.router.navigate(['gallery/'+value]);
       // this.photoServices.term$.subscribe(
       //   (a:any)=>{
-      //     // console.log("term $", )
+      //     // //console.log("term $", )
 
       //     this.photoServices.getPhotos(a).subscribe(
       //       (resp: any) => {
-      //         console.log('resp', resp);
+      //         //console.log('resp', resp);
       //         this.load = false;
     
       //         this.arrQuery.push(resp.results);
       //         this.photoServices.setResponse(this.arrQuery);
-      //         console.log('results', resp.results);
+      //         //console.log('results', resp.results);
               
       //       },
       //       (err: any) => {
       //         this.load = false;
     
-      //         console.log('error in search', err);
+      //         //console.log('error in search', err);
       //         alert(
       //           'Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)'
       //         );
@@ -99,15 +106,15 @@ export class SearchComponent implements OnInit {
   sendValue(value: any) {
     // this.arrQuery = [];
 
-    console.log('value', value);
+    //console.log('value', value);
 
     this.http.post(this.url + '/suggest', value).subscribe(
       (data: any) => {
-        console.log(data);
+        //console.log(data);
         this.setData(data);
       },
       (error) => {
-        console.log('error', error);
+        //console.log('error', error);
       }
     );
     // this.setData(value);
@@ -124,14 +131,14 @@ export class SearchComponent implements OnInit {
     for (var i in dd) {
       this.ddd.push(dd[i].title);
     }
-    console.log('ddd', this.ddd);
+    //console.log('ddd', this.ddd);
     this.optionss = this.ddd;
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
     );
-    console.log('options:', this.optionss);
-    console.log('flterred options:', this.filteredOptions);
+    //console.log('options:', this.optionss);
+    //console.log('flterred options:', this.filteredOptions);
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

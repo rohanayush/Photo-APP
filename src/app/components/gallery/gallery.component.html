@@ -15,9 +15,9 @@ style="background:url({{src}},0.8);overflow: auto;object-fit:cover;transition: b
   <button class="sideways btn" (click)="dialog(p)" style="background-color: {{p.color}};">
     <mat-icon [ngStyle]="{'color':'green'}">arrow_downward</mat-icon>
   </button>
-  <button class="sideways btn" (click)="viewFull(p)" style="background-color: white;margin-top:53px">
+  <!-- <button class="sideways btn" (click)="viewFull(p)" style="background-color: white;margin-top:53px">
     <mat-icon [ngStyle]="{'color':'green'}">remove_red_eye</mat-icon>
-  </button>
+  </button> -->
   <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
     <!-- <span class="cross" (click)="setDialog()">close</span> -->
     <ul>
