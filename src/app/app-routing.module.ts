@@ -8,12 +8,11 @@ import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   
-  { path: 'search', component: SearchComponent },
-  { path: 'gallery/:id', component: GalleryComponent, canActivate:[AuthGuard] },
+  { path: 'gallery/:id', component: GalleryComponent, },
   { path: 'full-view', component: PictureViewComponent },
 
-  { path: '',   redirectTo: '/search', pathMatch: 'full' }, // redirect to `first-component`
-  { path: '**', component: SearchComponent },  // Wildcard route for a 404 page
+  { path: '',   redirectTo: '/gallery/gallery', pathMatch: 'full' }, // redirect to `first-component`
+  { path: '**', component: GalleryComponent },  // Wildcard route for a 404 page
 ];
 
 @NgModule({

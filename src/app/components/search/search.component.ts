@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { UnsplashService } from 'src/app/unsplash.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import {  map, startWith } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router'
+import { map, startWith } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -46,14 +46,14 @@ export class SearchComponent implements OnInit {
   constructor(
     private photoServices: UnsplashService,
     private http: HttpClient,
-    private router:Router,
-    
+    private router: Router,
+
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     //console.log("router value",this.activatedRoute.snapshot.params['id'])
-    if(this.activatedRoute.snapshot.params['id'] == undefined){
+    if (this.activatedRoute.snapshot.params['id'] == undefined) {
       //console.log("caught in search")
     }
   }
@@ -68,38 +68,9 @@ export class SearchComponent implements OnInit {
       this.msg = true;
       //console.log('Reached inside null and value of msg is:', this.msg);
     } else if (typeof value != 'undefined') {
-      this.term = value;
-      this.sg = false;
-      this.arrQuery = [];
-      this.load = true;
-      this.photoServices.searchTerm(value);
-      this.router.navigate(['gallery/'+value]);
-      // this.photoServices.term$.subscribe(
-      //   (a:any)=>{
-      //     // //console.log("term $", )
-
-      //     this.photoServices.getPhotos(a).subscribe(
-      //       (resp: any) => {
-      //         //console.log('resp', resp);
-      //         this.load = false;
-    
-      //         this.arrQuery.push(resp.results);
-      //         this.photoServices.setResponse(this.arrQuery);
-      //         //console.log('results', resp.results);
-              
-      //       },
-      //       (err: any) => {
-      //         this.load = false;
-    
-      //         //console.log('error in search', err);
-      //         alert(
-      //           'Please search for something else like flower,flowerpot,rivers (photography terms) as the unsplash server is unable to find any image for your search. App is in early stage phase. Thank you for reaching out :)'
-      //         );
-      //       }
-      //     );
-      //   }
-      // )
-     
+      
+      // this.photoServices.searchTerm(value);
+      this.router.navigate(['gallery/' + value]);
     }
   }
 

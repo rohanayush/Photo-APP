@@ -57,17 +57,22 @@ export class GalleryComponent implements OnInit {
  
   ngOnInit(): void {
 
-    this.unsplashService.term$.subscribe((a) => {
-      this.resp = [];
-      if (a == 1) {
-        this.router.navigate(['search']);
-      } else {
-        this.unsplashService.getPhotos(a.toString()).subscribe((data) => {
-          this.resp.push(data.results);
-          this.resp = [...this.resp];
-        });
-      }
+    this.activatedRoute.params.subscribe( (params:any) => {
+      console.log("\n\n params: |n\n", params.id);
+      this.resp=[];
+      const a = params.id;
+      this.unsplashService.getPhotos(a.toString()).subscribe((data) => {
+        this.resp.push(data.results);
+        // alert("results if any"+ JSON.stringify(this.resp))
+        // this.resp = [...this.resp];
+      });
     });
+
+   
+  }
+  fullView(photo:any){
+    // alert(JSON.stringify(photo));
+    this.unsplashService.setFullView(photo);
   }
 
 

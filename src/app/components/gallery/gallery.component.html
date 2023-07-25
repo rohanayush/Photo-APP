@@ -1,57 +1,94 @@
 <app-search></app-search>
-<div class="row contain" 
-style="background:url({{src}},0.8);overflow: auto;object-fit:cover;transition: background 4.9s ease;"
-*ngFor="let pos of resp">
-<!-- class="row my-row justify-content-around" -->
-<div data-aos="zoom-out-down" data-aos-duration="700" class="col-md-6 col-sm-10 col-xs-11 col-lg-3 m-3"
-  style="background-color: {{p.color}};border-radius:11px;" *ngFor="let p of pos; let i=index"
-  (mouseenter)="processColor(p)">
-  <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
+<div
+  class="row contain" 
+  style="background:url({{
+    src
+  }},0.8);overflow: auto;object-fit:cover;transition: background 4.9s ease;height:100vh; overflow:scroll"
+  *ngFor="let pos of resp"
+>
+  <!-- class="row my-row justify-content-around" -->
+  <div
+    data-aos="zoom-out-down"
+    data-aos-duration="700"
+    class="col-md-6 col-sm-10 col-xs-11 col-lg-3 m-3"
+    style="background-color: {{ p.color }};border-radius:11px;"
+    *ngFor="let p of pos; let i = index"
+    (mouseenter)="processColor(p)"
+  >
+    <!-- <span (click)="showDetails(p)" class="fa fa-icon">i</span> -->
 
-
-  <img src="{{p.urls.small}}" />
-
-
-  <button class="sideways btn" (click)="dialog(p)" style="background-color: {{p.color}};">
-    <mat-icon [ngStyle]="{'color':'green'}">arrow_downward</mat-icon>
-  </button>
-  <!-- <button class="sideways btn" (click)="viewFull(p)" style="background-color: white;margin-top:53px">
+    <img src="{{ p.urls.small }}" (click)="viewFull(p)" />
+    
+    <button
+      class="sideways btn"
+      (click)="dialog(p)"
+      style="background-color: {{ p.color }};"
+    >
+      <mat-icon [ngStyle]="{ color: 'green' }">arrow_downward</mat-icon>
+    </button>
+    <!-- <button class="sideways btn" (click)="viewFull(p)" style="background-color: white;margin-top:53px">
     <mat-icon [ngStyle]="{'color':'green'}">remove_red_eye</mat-icon>
   </button> -->
-  <div *ngIf="dlg && p===q" class="dialog" style="background-color: {{p_color}};">
-    <!-- <span class="cross" (click)="setDialog()">close</span> -->
-    <ul>
-      <li (click)="register(p,p.urls.full) ">Full</li>
-      <li (click)="register(p,p.urls.regular)">Regular</li>
-      <li (click)="register(p,p.urls.raw)">Raw</li>
-      <li (click)="register(p,p.urls.small)">Small</li> 
-      <!-- <li (click)="setWallpaper(p.urls.regular)">Set as Background</li> -->
-    </ul>
+    <div
+      *ngIf="dlg && p === q"
+      class="dialog"
+      style="background-color: {{ p_color }};"
+    >
+      <!-- <span class="cross" (click)="setDialog()">close</span> -->
+      <ul>
+        <li (click)="register(p, p.urls.full)">Full</li>
+        <li (click)="register(p, p.urls.regular)">Regular</li>
+        <li (click)="register(p, p.urls.raw)">Raw</li>
+        <li (click)="register(p, p.urls.small)">Small</li>
+        <!-- <li (click)="setWallpaper(p.urls.regular)">Set as Background</li> -->
+      </ul>
+    </div>
 
+    <!-- hover details -->
+    <div class="info" (click)="info(p)">
+      <button class="btn" style="font-size: 5px">
+        <mat-icon [ngStyle]="{ 'box-shadow': ' 2px 2px 2px 2px white' }"
+          >info</mat-icon
+        >
+      </button>
+    </div>
+
+    <div
+      class="img-box"
+      *ngIf="img_box && p === q"
+      style="background-color: {{ p_color }}; z-index:104"
+    >
+      <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
+      <p>
+        Photo by
+        <a href="{{ url_author }}"
+          ><span
+            style="background-color: white;color: {{
+              p_color
+            }};padding:7px;font-weight:bold;border-radius:12px"
+            >{{ p.user.first_name }}&nbsp;{{ p.user.last_name }}</span
+          ></a
+        >
+        on
+        <a
+          href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"
+          ><span
+            style="background-color: white;color: {{
+              p_color
+            }};padding:7px;font-weight:bold;border-radius:12px"
+            >Unsplash</span
+          ></a
+        >
+      </p>
+      <h2>{{ p.alt_description }}</h2>
+      <p>{{ p.description }}</p>
+    </div>
   </div>
-
-  <!-- hover details -->
-  <div class="info" (click)="info(p)">
-    <button class="btn" style="font-size:5px;">
-      <mat-icon [ngStyle]="{'box-shadow':' 2px 2px 2px 2px white'}">info</mat-icon>
-    </button>
-  </div>
-
-
-  <div class="img-box " *ngIf="img_box && p===q" style="background-color: {{p_color}}; z-index:104">
-    <!-- `https://unsplash.com/${p.user.link.html}?utm_source=favourites&utm_medium=referral` -->
-    <p>Photo by <a href={{url_author}}><span
-          style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">{{p.user.first_name}}&nbsp;{{p.user.last_name}}</span></a>
-      on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral"><span
-          style="background-color: white;color: {{p_color}};padding:7px;font-weight:bold;border-radius:12px">Unsplash</span></a>
-    </p>
-    <h2>{{p.alt_description}}</h2>
-    <p>{{p.description}}</p>
-
-
-  </div>
-</div>
-<div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-  (scrolled)="onScroll()">
-</div>
+  <div
+    class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+  ></div>
 </div>
