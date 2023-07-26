@@ -54,14 +54,15 @@ export class GalleryComponent implements OnInit {
   tail = '?utm_source=favourites&utm_medium=referral';
   head: string;
   tempTerm: string;
+  query:string;
  
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe( (params:any) => {
       console.log("\n\n params: |n\n", params.id);
       this.resp=[];
-      const a = params.id;
-      this.unsplashService.getPhotos(a.toString()).subscribe((data) => {
+      this.query = params.id;
+      this.unsplashService.getPhotos(this.query.toString()).subscribe((data) => {
         this.resp.push(data.results);
         // alert("results if any"+ JSON.stringify(this.resp))
         // this.resp = [...this.resp];

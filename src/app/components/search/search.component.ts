@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 import { UnsplashService } from 'src/app/unsplash.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+  @Input() query;
   val: String;
   msg: Boolean;
   val1 = '🕵️';
@@ -24,7 +25,7 @@ export class SearchComponent implements OnInit {
 
   title = 'photoWizard';
   arrQuery = [];
-  url: string = 'https://playground-trends-backend.herokuapp.com';
+  url: string = 'https://rohanayush.pythonanywhere.com/';
   load = false;
   myControl = new FormControl();
   ddd: any[] = [];
@@ -52,10 +53,14 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.val=this.query;
     //console.log("router value",this.activatedRoute.snapshot.params['id'])
     if (this.activatedRoute.snapshot.params['id'] == undefined) {
       //console.log("caught in search")
     }
+  }
+  ngOnChanges(simple:SimpleChange){
+    this.val = this.query;
   }
 
   search(value) {

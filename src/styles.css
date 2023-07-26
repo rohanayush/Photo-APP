@@ -28,16 +28,8 @@ body{
     /* background: white; */
     padding:0;
   }
-  
-  *{
-     
-      /* margin-right:0px; */
-      /* padding:0px; */
-      overflow-x:hidden;
-      overflow-y:hidden;
-  
-      
-  }
+
+ 
   /* color collection #C0A68C */
   body{
       background: #FF9CDC;  
