@@ -1,27 +1,36 @@
-<div class="center">
-        
-    <form (ngSubmit)="search(val)">
-       <mat-form-field>
-        <mat-label>Search for pictures</mat-label>
-        <input type="text" #query placeholder="put your query" aria-label="Number" matInput
-          [formControl]="myControl" [matAutocomplete]="auto" (keyup)="sendValue(query.value)" name="val"
-          [(ngModel)]="val">
-        <!-- <div style="z-index:2400"> -->
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-        <!-- </div> -->
-      </mat-form-field>
-      <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
+<div
+  class="center"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <form (ngSubmit)="search(val)">
+    <mat-form-field>
+      <mat-label>Search for pictures</mat-label>
+      <input
+        type="text"
+        #query
+        placeholder="put your query"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (keyup)="sendValue(query.value)"
+        name="val"
+        [(ngModel)]="val"
+      />
+      <!-- <div style="z-index:2400"> -->
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <!-- </div> -->
+    </mat-form-field>
+    <!-- <mat-icon style="position:relative;left:0;margin-bottom: 20px;margin-left:5px;" (click)="search1()">
     search (click)="presen1()"
   </mat-icon> -->
-      <input type="submit" value="Search" class="btn"
-        style="position:relative;left:0;margin-bottom: 50px;margin-left:5px;">
-        <button class="btn min" style="position:relative;left:0;margin-bottom: 50px;margin-left:15px;word-wrap:break-word;" >
-          -
-         </button>
-    </form>
-    
-  </div>
+    <input type="submit" value="Search" class="btn" />
+  </form>
+</div>

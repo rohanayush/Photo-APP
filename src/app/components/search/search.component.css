@@ -1,3 +1,7 @@
 form{
-    margin-left:83px;
+    background: white;
+    width:max-content;
+    padding:10px;
+    border-radius:10px;
+    display: flex;
 }
