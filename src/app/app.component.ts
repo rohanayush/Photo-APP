@@ -28,7 +28,7 @@ export class AppComponent {
   }
   sg_arr1=[];
   p_color: string;
-  url: string = "https://playground-trends-backend.herokuapp.com"
+  url: string = "https://rohanayush.pythonanywhere.com/"
   myControl = new FormControl();
   src:string="";
   processColor(c) {
@@ -293,15 +293,6 @@ export class AppComponent {
   register(p,q){
     this.load =true;
     this.download(q,p);
-// this.photoServices.register_download(p).subscribe(
-// (  data:any)=>{
-//   console.log("some data",data);
-//   this.download(q,p);
-// },
-// (err:any)=>{
-//   console.log("error in registering",err);
-// }
-// )
   }
   explorer=true;
 
